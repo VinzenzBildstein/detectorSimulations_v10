@@ -68,9 +68,9 @@ private:
 public:
     PrimaryGeneratorAction(HistoManager*);
     virtual ~PrimaryGeneratorAction();
-    virtual void GeneratePrimaries(G4Event*);
-	 virtual void GenerateKentuckyPrimaries(G4Event*);
-    
+    void GeneratePrimaries(G4Event*);
+	 void GenerateKentuckyPrimaries(G4Event*);
+	 void GenerateAngularCorrelation(G4Event*); 
 
     void SetNumberOfDecayingLaBrDetectors(G4int num) { fNumberOfDecayingLaBrDetectors = num; }
     void SetEfficiencyEnergy(G4double num) { fEffEnergy = num; fHistoManager->BeamEnergy(num); }
@@ -87,6 +87,8 @@ public:
     void PassTarget(G4double);
     void PrepareBeamFile(G4String);
     void SetLayeredTargetBeamDistro(G4int layer);
+
+    void SetAngularCorrelation(G4ThreeVector num ) { fAngularCorrelation = static_cast<AcType>(num.x()); fEnergyDraining = num.y(); fEnergyFeeding = num.z(); }
 
 	 void SetKentuckyEnergy(G4double val);
 	 void SetKentuckyReaction(G4String reaction);
@@ -130,6 +132,12 @@ private:
 
 	 Kentucky* fKentucky;
     
+	 // angular correlation settings
+	 enum class AcType { Z0 = 0, Z2 = 2, Z4 = 4, NoAngularCorrelation = 10 };
+	 AcType fAngularCorrelation{AcType::NoAngularCorrelation};
+	 G4double fEnergyFeeding{0.};
+	 G4double fEnergyDraining{0.};
+
     //functions
     void LaBrinit();
 };

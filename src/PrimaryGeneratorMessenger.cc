@@ -102,6 +102,10 @@ PrimaryGeneratorMessenger::PrimaryGeneratorMessenger(PrimaryGeneratorAction* Gun
 	fBeamFileCmd->SetGuidance("Set beam distribution within a target using definitions in a data file");
 	fBeamFileCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
+	fAngularCorrelationCmd = new G4UIcmdWith3Vector("/DetSys/gun/AngularCorrelation",this);
+	fAngularCorrelationCmd->SetGuidance("Set angular correlation as <z, low Energy, high Energy>, where z is the angular distribution to be used (0 = Z_0, 2 = Z_2, 4 = Z_4), and low/high Energy are the energies of the two gamma rays.");
+	fAngularCorrelationCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
 	fKentuckyEnergyCmd = new G4UIcmdWithADoubleAndUnit("/DetSys/gun/KentuckyEnergy",this);
 	fKentuckyEnergyCmd->SetGuidance("Set neutron energy at zero-degree for Kentucky experiment.");
 	fKentuckyEnergyCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
@@ -144,6 +148,7 @@ PrimaryGeneratorMessenger::~PrimaryGeneratorMessenger() {
 	delete fBeamSpotSigmaCmd;
 	delete fBeamDistroCmd;
 	delete fBeamFileCmd;
+	delete fAngularCorrelationCmd;
 	delete fKentuckyEnergyCmd;
 	delete fKentuckyReactionCmd;
 	delete fMinimumPhiCmd;
@@ -202,6 +207,10 @@ void PrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command, G4String newVa
 	if(command == fBeamFileCmd) {
 		G4cout<<"Beam Distribution from file "<<newValue<<" selected "<< G4endl;
 		fAction->PrepareBeamFile(newValue);
+		return;
+	}
+	if(command == fAngularCorrelationCmd) {
+		fAction->SetAngularCorrelation(fAngularCorrelationCmd->GetNew3VectorValue(newValue));
 		return;
 	}
 	if(command == fKentuckyEnergyCmd) {

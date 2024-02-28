@@ -105,6 +105,10 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
+	if(fAngularCorrelation != AcType::NoAngularCorrelation) {
+		return GenerateAngularCorrelation(anEvent);
+	}
+
 	if(fKentucky != nullptr) {
 		return GenerateKentuckyPrimaries(anEvent);
 	}
@@ -157,10 +161,10 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 		G4double randomZ   = crystalLength*G4UniformRand() + detRadialPos;
 		G4double randomPhi = 2.0*(360.*deg)*G4UniformRand();
-		G4double randomR   = crystalRadius*pow(G4UniformRand(),0.5);
+		G4double randomR   = crystalRadius*std::pow(G4UniformRand(),0.5);
 
-		G4double x2=randomR*sin(randomPhi);
-		G4double y2=randomR*cos(randomPhi);
+		G4double x2=randomR*std::sin(randomPhi);
+		G4double y2=randomR*std::cos(randomPhi);
 		G4double z2=randomZ;
 
 		G4ThreeVector pos2 = G4ThreeVector(x2,y2,z2);
@@ -181,7 +185,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		G4double randcostheta = 2.*G4UniformRand()-1.0;
 		G4double randsintheta = sqrt(1. - randcostheta*randcostheta);
 		G4double randphi      = (360.*deg)*G4UniformRand();
-		G4ThreeVector thisDirection = G4ThreeVector(randsintheta*cos(randphi), randsintheta*sin(randphi), randcostheta);
+		G4ThreeVector thisDirection = G4ThreeVector(randsintheta*std::cos(randphi), randsintheta*std::sin(randphi), randcostheta);
 
 		fParticleGun->SetParticleDefinition(agamma);
 		fParticleGun->SetParticlePosition(thisPosition);
@@ -242,17 +246,17 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 			if(fConeAngleBool){
 				//min max input order doesnt actually matter
-				G4double cmin =cos(fAngleMinInit);
-				G4double cmax =cos(fAngleInit);
+				G4double cmin =std::cos(fAngleMinInit);
+				G4double cmax =std::cos(fAngleInit);
 				G4double CosTheta = G4UniformRand()*abs(cmax-cmin);
 				if(cmin<cmax)CosTheta+=cmin;
 				else CosTheta+=cmax;
 
 				// 	      G4cout<<asin(SinTheta)<<G4endl;
-				G4double SinTheta = sqrt(1. - pow(CosTheta, 2.0));
+				G4double SinTheta = sqrt(1. - std::pow(CosTheta, 2.0));
 				G4double Phi      = (2.0*CLHEP::pi)*G4UniformRand();
 
-				effdirection = G4ThreeVector(SinTheta*cos(Phi), SinTheta*sin(Phi), CosTheta);
+				effdirection = G4ThreeVector(SinTheta*std::cos(Phi), SinTheta*std::sin(Phi), CosTheta);
 				// G4cout<<effdirection<<G4endl;
 
 			}	  
@@ -262,7 +266,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 			effRandCosTheta = 2.*G4UniformRand()-1.0; //cos(theta) = 2cos^2(0.5theta)-1 ??
 			effRandSinTheta = sqrt(1. - effRandCosTheta*effRandCosTheta); //from sin^2(theta)+cos^2(theta)=1
 			effRandPhi      = (360.*deg)*G4UniformRand();
-			effdirection = G4ThreeVector(effRandSinTheta*cos(effRandPhi), effRandSinTheta*sin(effRandPhi), effRandCosTheta);
+			effdirection = G4ThreeVector(effRandSinTheta*std::cos(effRandPhi), effRandSinTheta*std::sin(effRandPhi), effRandCosTheta);
 			//converts from Spherical polar(physics def.) to cartesian via (rsin(theta)cos(phi),rsin(theta)cos(phi),rcos(theta)) r=1,unit length
 		}
 
@@ -436,9 +440,9 @@ void PrimaryGeneratorAction::GenerateKentuckyPrimaries(G4Event* anEvent)
 	// calculate the position in the gas cell (depending on the size of the gas cell)
 	// pencil beam shape
 	G4double rho = sqrt(G4UniformRand())*5.*mm;
-	G4double theta = G4UniformRand()*2.*M_PI;
-	G4double x = rho*cos(theta);
-	G4double y = rho*sin(theta);
+	G4double theta = G4UniformRand()*2.*M_PI*radian;
+	G4double x = rho*std::cos(theta);
+	G4double y = rho*std::sin(theta);
 	// uniform distribution over length of gas cell
 	G4double z = -31.*mm/2.+G4UniformRand()*31.*mm;
 
@@ -460,6 +464,71 @@ void PrimaryGeneratorAction::GenerateKentuckyPrimaries(G4Event* anEvent)
 	}
 
 	// fire gun
+	fParticleGun->GeneratePrimaryVertex(anEvent);
+}
+
+void PrimaryGeneratorAction::GenerateAngularCorrelation(G4Event* anEvent)
+{
+	// first ("feeding") gamma ray is always isotropical
+	// second ones direction depends on the fAngularCorrelation selected and the direction of the first gamma ray
+	// position is always the origin
+
+	G4ThreeVector origin(0., 0., 0.);
+	fParticleGun->SetParticlePosition(origin);
+	fParticleGun->SetParticleEnergy(fEnergyFeeding);
+
+	G4double theta = std::acos(2.*G4UniformRand()-1.)*radian;
+	G4double phi = G4UniformRand()*2.*M_PI*radian;
+
+	G4ThreeVector direction(0., 0., 1.);
+	direction.setTheta(theta);
+	direction.setPhi(phi);
+
+	fParticleGun->SetParticleMomentumDirection(direction);
+	if(fHistoManager->RecordGun()){
+		fHistoManager->BeamEnergy(fEnergyFeeding);
+		fHistoManager->BeamTheta(theta);
+		fHistoManager->BeamPhi(phi);
+		fHistoManager->BeamPos(origin);
+	}
+	fParticleGun->GeneratePrimaryVertex(anEvent);
+
+	// second gamma
+	fParticleGun->SetParticleEnergy(fEnergyDraining);
+	// quick and dirty method to get the distribution, i.e. select random theta, random y, check if y <= f(x)
+	// all our functions are in the y-range of 0-2
+	G4double newTheta, tmpY, wTheta;
+	G4double newPhi = G4UniformRand()*2.*M_PI*radian;
+	do {
+		newTheta = G4UniformRand()*M_PI*radian;
+		tmpY = G4UniformRand()*2.;
+		wTheta = 0.;
+		switch(fAngularCorrelation) {
+			case AcType::Z0:
+				// angle between the gammas should follow Z_0 = 1
+				wTheta = 2.; // we accept any random theta for Z_0
+				break;
+			case AcType::Z2:
+				// angle between the gammas should follow Z_2 = 1 + P_2(cos(theta))
+				// P_2(cos(theta)) = 1./2.*(3.*std::pow(cos(theta), 2) - 1.);
+				wTheta = 1.+ 1./2.*(3.*std::pow(std::cos(theta), 2) - 1.);
+				break;
+			case AcType::Z4:
+				// angle between the gammas should follow Z_4 = 1 + P_4(cos(theta))
+				// P_4(cos(theta)) = 1./8.*(35.*std::pow(cos(theta), 4) - 30.*std::pow(cos(theta), 2) + 3.);
+				wTheta = 1.+ 1./8.*(35.*std::pow(std::cos(theta), 4) - 30.*std::pow(std::cos(theta), 2) + 3.);
+				break;
+			default:
+				std::cout<<"Unknown angular correlation type "<<static_cast<std::underlying_type<AcType>::type>(fAngularCorrelation)<<", only possible ones are "<<static_cast<std::underlying_type<AcType>::type>(AcType::Z0)<<", "<<static_cast<std::underlying_type<AcType>::type>(AcType::Z2)<<", and "<<static_cast<std::underlying_type<AcType>::type>(AcType::Z4)<<std::endl;
+				exit(1);
+		}
+	} while(tmpY > wTheta);
+	// we use that theta to define a new direction, then we rotate it with the old theta and phi
+	direction.set(std::sin(newTheta)*std::cos(newPhi), std::sin(newTheta)*std::sin(newPhi), std::cos(newTheta));
+	direction.rotateY(theta);
+	direction.rotateZ(phi);
+
+	fParticleGun->SetParticleMomentumDirection(direction);
 	fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 

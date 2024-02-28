@@ -78,6 +78,7 @@ private:
     G4UIcmdWithADoubleAndUnit*     fBeamSpotSigmaCmd;
     G4UIcmdWithAnInteger*			  fBeamDistroCmd;
     G4UIcmdWithAString*				  fBeamFileCmd;
+    G4UIcmdWith3Vector*            fAngularCorrelationCmd;
     G4UIcmdWithADoubleAndUnit*     fKentuckyEnergyCmd;
     G4UIcmdWithAString*            fKentuckyReactionCmd;
     G4UIcmdWithADoubleAndUnit*     fMinimumPhiCmd;
