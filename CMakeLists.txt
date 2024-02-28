@@ -45,17 +45,17 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #  ${PROJECT_SOURCE_DIR}/../shared/src/SteppingAction.cc)
 
 #----------------------------------------------------------------------------
-# Find GSL library
-#
-find_package(GSL REQUIRED)
-
-#----------------------------------------------------------------------------
 # Find ROOT
 #
 list(APPEND CMAKE_PREFIX_PATH $ENV{ROOTSYS})
 find_package(ROOT REQUIRED COMPONENTS Hist)
 include_directories(include ${ROOT_INCLUDE_DIRS})
 include(${ROOT_USE_FILE})
+
+#----------------------------------------------------------------------------
+# Find GSL library
+#
+find_package(GSL REQUIRED)
 
 #----------------------------------------------------------------------------
 # Find HBOOK (optional package)
