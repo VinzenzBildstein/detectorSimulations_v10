@@ -473,6 +473,8 @@ void PrimaryGeneratorAction::GenerateAngularCorrelation(G4Event* anEvent)
 	// second ones direction depends on the fAngularCorrelation selected and the direction of the first gamma ray
 	// position is always the origin
 
+	fParticleGun->SetParticleDefinition(G4ParticleTable::GetParticleTable()->FindParticle("gamma"));
+
 	G4ThreeVector origin(0., 0., 0.);
 	fParticleGun->SetParticlePosition(origin);
 	fParticleGun->SetParticleEnergy(fEnergyFeeding);
@@ -492,6 +494,9 @@ void PrimaryGeneratorAction::GenerateAngularCorrelation(G4Event* anEvent)
 		fHistoManager->BeamPos(origin);
 	}
 	fParticleGun->GeneratePrimaryVertex(anEvent);
+	if(fVerbosityLevel > 0) {
+		G4cout<<__PRETTY_FUNCTION__<<": created first gamma with energy "<<fEnergyFeeding/keV<<" keV, theta "<<theta<<", and phi "<<phi<<G4endl;
+	}
 
 	// second gamma
 	fParticleGun->SetParticleEnergy(fEnergyDraining);
@@ -530,6 +535,9 @@ void PrimaryGeneratorAction::GenerateAngularCorrelation(G4Event* anEvent)
 
 	fParticleGun->SetParticleMomentumDirection(direction);
 	fParticleGun->GeneratePrimaryVertex(anEvent);
+	if(fVerbosityLevel > 0) {
+		G4cout<<__PRETTY_FUNCTION__<<": created second gamma with energy "<<fEnergyDraining/keV<<" keV, theta "<<direction.theta()<<", and phi "<<direction.phi()<<G4endl;
+	}
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

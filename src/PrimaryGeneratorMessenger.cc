@@ -103,7 +103,7 @@ PrimaryGeneratorMessenger::PrimaryGeneratorMessenger(PrimaryGeneratorAction* Gun
 	fBeamFileCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
 	fAngularCorrelationCmd = new G4UIcmdWith3Vector("/DetSys/gun/AngularCorrelation",this);
-	fAngularCorrelationCmd->SetGuidance("Set angular correlation as <z, low Energy, high Energy>, where z is the angular distribution to be used (0 = Z_0, 2 = Z_2, 4 = Z_4), and low/high Energy are the energies of the two gamma rays.");
+	fAngularCorrelationCmd->SetGuidance("Set angular correlation as <z, low Energy, high Energy>, where z is the angular distribution to be used (0 = Z_0, 2 = Z_2, 4 = Z_4), and low/high Energy are the energies of the two gamma rays (in keV).");
 	fAngularCorrelationCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
 	fKentuckyEnergyCmd = new G4UIcmdWithADoubleAndUnit("/DetSys/gun/KentuckyEnergy",this);

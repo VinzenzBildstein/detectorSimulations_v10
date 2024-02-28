@@ -88,7 +88,7 @@ public:
     void PrepareBeamFile(G4String);
     void SetLayeredTargetBeamDistro(G4int layer);
 
-    void SetAngularCorrelation(G4ThreeVector num ) { fAngularCorrelation = static_cast<AcType>(num.x()); fEnergyDraining = num.y(); fEnergyFeeding = num.z(); }
+    void SetAngularCorrelation(G4ThreeVector num ) { fAngularCorrelation = static_cast<AcType>(num.x()); fEnergyDraining = num.y()*keV; fEnergyFeeding = num.z()*keV; }
 
 	 void SetKentuckyEnergy(G4double val);
 	 void SetKentuckyReaction(G4String reaction);
