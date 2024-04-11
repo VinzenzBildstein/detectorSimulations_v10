@@ -106,14 +106,14 @@ void HistoManager::Book() {
 		fNtColIdHit[colId++] = analysisManager->CreateNtupleDColumn("time");
 		fNtColIdHit[colId++] = analysisManager->CreateNtupleIColumn("targetZ"); // 14 here
 		if(fDetectorConstruction->Descant() || fDetectorConstruction->Testcan()) {
-			G4cout<<"Filling descant settings after "<<colId<<G4endl;
+			if(G4Threading::G4GetThreadId() <= 0) G4cout<<"Filling descant settings after "<<colId<<G4endl;
 			fNtColIdHit[colId++] = analysisManager->CreateNtupleDColumn("eDepVector", fEdepVector);
 			fNtColIdHit[colId++] = analysisManager->CreateNtupleDColumn("eKinVector", fEkinVector);
 			fNtColIdHit[colId++] = analysisManager->CreateNtupleIColumn("particleTypeVector", fParticleTypeVector); // 17 here
 		}
 		if(fRecordGun) {
 			fFirstRecordingId = colId; // this is actually one less than the first recording ID!
-			G4cout<<"Creating gun settings after "<<fFirstRecordingId<<G4endl;
+			if(G4Threading::G4GetThreadId() <= 0) G4cout<<"Creating gun settings after column ID "<<fFirstRecordingId<<G4endl;
 			fNtColIdHit[colId++] = analysisManager->CreateNtupleDColumn("primaryE");
 			fNtColIdHit[colId++] = analysisManager->CreateNtupleDColumn("primaryTheta");
 			fNtColIdHit[colId++] = analysisManager->CreateNtupleDColumn("primaryPhi");
