@@ -482,17 +482,11 @@ void PrimaryGeneratorAction::GenerateAngularCorrelation(G4Event* anEvent)
 	G4double theta = std::acos(2.*G4UniformRand()-1.)*radian;
 	G4double phi = G4UniformRand()*2.*M_PI*radian;
 
-	G4ThreeVector direction(0., 0., 1.);
-	direction.setTheta(theta);
-	direction.setPhi(phi);
+	G4ThreeVector direction1(0., 0., 1.);
+	direction1.setTheta(theta);
+	direction1.setPhi(phi);
 
-	fParticleGun->SetParticleMomentumDirection(direction);
-	if(fHistoManager->RecordGun()){
-		fHistoManager->BeamEnergy(fEnergyFeeding);
-		fHistoManager->BeamTheta(theta);
-		fHistoManager->BeamPhi(phi);
-		fHistoManager->BeamPos(origin);
-	}
+	fParticleGun->SetParticleMomentumDirection(direction1);
 	fParticleGun->GeneratePrimaryVertex(anEvent);
 	if(fVerbosityLevel > 0) {
 		G4cout<<__PRETTY_FUNCTION__<<": created first gamma with energy "<<fEnergyFeeding/keV<<" keV, theta "<<theta<<", and phi "<<phi<<G4endl;
@@ -516,12 +510,12 @@ void PrimaryGeneratorAction::GenerateAngularCorrelation(G4Event* anEvent)
 			case AcType::Z2:
 				// angle between the gammas should follow Z_2 = 1 + P_2(cos(theta))
 				// P_2(cos(theta)) = 1./2.*(3.*std::pow(cos(theta), 2) - 1.);
-				wTheta = 1.+ 1./2.*(3.*std::pow(std::cos(theta), 2) - 1.);
+				wTheta = 1.+ 1./2.*(3.*std::pow(std::cos(newTheta), 2) - 1.);
 				break;
 			case AcType::Z4:
 				// angle between the gammas should follow Z_4 = 1 + P_4(cos(theta))
 				// P_4(cos(theta)) = 1./8.*(35.*std::pow(cos(theta), 4) - 30.*std::pow(cos(theta), 2) + 3.);
-				wTheta = 1.+ 1./8.*(35.*std::pow(std::cos(theta), 4) - 30.*std::pow(std::cos(theta), 2) + 3.);
+				wTheta = 1.+ 1./8.*(35.*std::pow(std::cos(newTheta), 4) - 30.*std::pow(std::cos(newTheta), 2) + 3.);
 				break;
 			default:
 				std::cout<<"Unknown angular correlation type "<<static_cast<std::underlying_type<AcType>::type>(fAngularCorrelation)<<", only possible ones are "<<static_cast<std::underlying_type<AcType>::type>(AcType::Z0)<<", "<<static_cast<std::underlying_type<AcType>::type>(AcType::Z2)<<", and "<<static_cast<std::underlying_type<AcType>::type>(AcType::Z4)<<std::endl;
@@ -529,14 +523,22 @@ void PrimaryGeneratorAction::GenerateAngularCorrelation(G4Event* anEvent)
 		}
 	} while(tmpY > wTheta);
 	// we use that theta to define a new direction, then we rotate it with the old theta and phi
-	direction.set(std::sin(newTheta)*std::cos(newPhi), std::sin(newTheta)*std::sin(newPhi), std::cos(newTheta));
-	direction.rotateY(theta);
-	direction.rotateZ(phi);
+	G4ThreeVector direction2(std::sin(newTheta)*std::cos(newPhi), std::sin(newTheta)*std::sin(newPhi), std::cos(newTheta));
+	direction2.rotateY(direction1.theta());
+	direction2.rotateZ(direction1.phi());
 
-	fParticleGun->SetParticleMomentumDirection(direction);
+	if(fHistoManager->RecordGun()){
+		fHistoManager->BeamEnergy(fEnergyFeeding);
+		fHistoManager->BeamTheta(theta);
+		fHistoManager->BeamPhi(phi);
+		fHistoManager->BeamPos(direction2);
+	}
+
+	fParticleGun->SetParticleMomentumDirection(direction2);
 	fParticleGun->GeneratePrimaryVertex(anEvent);
 	if(fVerbosityLevel > 0) {
-		G4cout<<__PRETTY_FUNCTION__<<": created second gamma with energy "<<fEnergyDraining/keV<<" keV, theta "<<direction.theta()<<", and phi "<<direction.phi()<<G4endl;
+		G4cout<<__PRETTY_FUNCTION__<<": created second gamma with energy "<<fEnergyDraining/keV<<" keV, theta "<<direction2.theta()<<", and phi "<<direction2.phi()<<G4endl;
+		G4cout<<__PRETTY_FUNCTION__<<": gamma 1 theta "<<direction1.theta()/deg<<" ("<<theta/deg<<"), phi "<<direction1.phi()/deg<<" ("<<phi/deg<<"), gamma 2 theta "<<direction2.theta()/deg<<", phi "<<direction2.phi()/deg<<", angle "<<direction1.angle(direction2)/deg<<" (newTheta "<<newTheta/deg<<", newPhi "<<newPhi/deg<<")"<<G4endl;
 	}
 }
 
