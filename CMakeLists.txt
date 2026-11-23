@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------------
 # Setup the project
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 project(Griffinv10)
 
 set(CMAKE_BUILD_TYPE Debug)
@@ -49,8 +49,9 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #
 list(APPEND CMAKE_PREFIX_PATH $ENV{ROOTSYS})
 find_package(ROOT REQUIRED COMPONENTS Hist)
+message(STATUS "Added ${ROOT_INCLUDE_DIRS} to include directories")
 include_directories(include ${ROOT_INCLUDE_DIRS})
-include(${ROOT_USE_FILE})
+#include(${ROOT_USE_FILE})
 
 #----------------------------------------------------------------------------
 # Find GSL library
