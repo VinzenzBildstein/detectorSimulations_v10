@@ -169,7 +169,7 @@ void PrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command, G4String newVa
       return;
    }
    if(command == fEfficiencyPositionCmd) {
-      fAction->SetEfficiencyPosition(G4UIcmdWith3Vector::GetNew3VectorValue(newValue));
+      fAction->SetEfficiencyPosition(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
       return;
    }
    if(command == fEfficiencyParticleCmd) {
