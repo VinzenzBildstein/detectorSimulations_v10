@@ -147,7 +147,7 @@ void HistoManager::Save()
       analysisManager->Write();
       analysisManager->CloseFile();
 
-      delete G4RootAnalysisManager::Instance();
+      // geant4.11 now deletes the G4RootAnalysisManager automatically
       fFactoryOn = false;
    }
 }
