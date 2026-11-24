@@ -499,7 +499,7 @@ void DetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
       fDetector->SetGridDimensions(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
    }
    if(command == fAddGridColourCmd) {
-      fDetector->SetGridColour(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
+      fDetector->SetGridColour(G4UIcmdWith3Vector::GetNew3VectorValue(newValue));
    }
    if(command == fAddGridPosOffsetCmd) {
       fDetector->SetGridPosOffset(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
@@ -520,10 +520,10 @@ void DetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
       fDetector->AddApparatusGriffinStructure(G4UIcmdWithAnInteger::GetNewIntValue(newValue));
    }
    if(command == fAddDetectionSystemLanthanumBromideCmd) {
-      fDetector->AddDetectionSystemLanthanumBromide(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
+      fDetector->AddDetectionSystemLanthanumBromide(G4UIcmdWith3Vector::GetNew3VectorValue(newValue));
    }
    if(command == fAddDetectionSystemAncillaryBGOCmd) {
-      fDetector->AddDetectionSystemAncillaryBGO(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
+      fDetector->AddDetectionSystemAncillaryBGO(G4UIcmdWith3Vector::GetNew3VectorValue(newValue));
    }
    if(command == fAddDetectionSystem8piCmd) {
       fDetector->AddDetectionSystem8pi(G4UIcmdWithAnInteger::GetNewIntValue(newValue));
@@ -536,7 +536,7 @@ void DetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
       fDetector->AddDetectionSystemDescant(G4UIcmdWithAnInteger::GetNewIntValue(newValue));
    }
    if(command == fAddDetectionSystemDescantAuxPortsCmd) {
-      fDetector->AddDetectionSystemDescantAuxPorts(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
+      fDetector->AddDetectionSystemDescantAuxPorts(G4UIcmdWith3Vector::GetNew3VectorValue(newValue));
    }
    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    if(command == fAddApparatusDescantStructureCmd) {
@@ -547,18 +547,17 @@ void DetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
       fDetector->SetDetectionSystemDescantColor(newValue);
    }
    if(command == fSetDetectionSystemDescantRotationCmd) {
-      fDetector->SetDetectionSystemDescantRotation(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
+      fDetector->SetDetectionSystemDescantRotation(G4UIcmdWith3Vector::GetNew3VectorValue(newValue));
    }
    if(command == fAddDetectionSystemDescantCartCmd) {
       fDetector->AddDetectionSystemDescantCart(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
    }
    if(command == fAddDetectionSystemDescantSpherCmd) {
-      fDetector->AddDetectionSystemDescantSpher(G4UIcmdWith3VectorAndUnit::GetNew3VectorRawValue(newValue), G4UIcmdWithADoubleAndUnit::GetNewUnitValue(newValue));
+      fDetector->AddDetectionSystemDescantSpher(G4UIcmdWith3VectorAndUnit::GetNew3VectorRawValue(newValue), G4UIcmdWith3VectorAndUnit::GetNewUnitValue(newValue));
    }
    if(command == fAddDetectionSystemTestcanCmd) {
-      fDetector->AddDetectionSystemTestcan(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
+      fDetector->AddDetectionSystemTestcan(G4UIcmdWith3Vector::GetNew3VectorValue(newValue));
    }
-
    if(command == fAddDetectionSystemSceptarCmd) {
       fDetector->AddDetectionSystemSceptar(G4UIcmdWithAnInteger::GetNewIntValue(newValue));
    }
@@ -593,10 +592,10 @@ void DetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
       fDetector->AddDetectionSystemGriffinSetExtensionSuppLocation(G4UIcmdWithAnInteger::GetNewIntValue(newValue));
    }
    if(command == fAddDetectionSystemGriffinSetPositionCmd) {
-      fDetector->AddDetectionSystemGriffinSetPosition(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
+      fDetector->AddDetectionSystemGriffinSetPosition(G4UIcmdWith3Vector::GetNew3VectorValue(newValue));
    }
    if(command == fAddDetectionSystemGriffinSetDeadLayerCmd) {
-      fDetector->AddDetectionSystemGriffinSetDeadLayer(G4UIcmdWith3VectorAndUnit::GetNew3VectorValue(newValue));
+      fDetector->AddDetectionSystemGriffinSetDeadLayer(G4UIcmdWith3Vector::GetNew3VectorValue(newValue));
    }
    if(command == fAddDetectionSystemSpiceCmd) {
       fDetector->AddDetectionSystemSpice();
