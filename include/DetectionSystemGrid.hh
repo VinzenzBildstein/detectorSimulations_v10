@@ -35,61 +35,57 @@
 #ifndef DETECTIONSYSTEMGRID_HH
 #define DETECTIONSYSTEMGRID_HH
 
+#include "G4ThreeVector.hh"
+#include "G4Box.hh"
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
 
 class G4AssemblyVolume;
 class FieldSetup;
 
-class DetectionSystemGrid
-{
+class DetectionSystemGrid {
 public:
-    DetectionSystemGrid(G4double xLengthIn, G4double yLengthIn, G4double zLengthIn, G4double gridSizeIn, G4String gridMat, G4ThreeVector gridColour, G4ThreeVector posOffset);
-    ~DetectionSystemGrid();
+   DetectionSystemGrid(G4double xLengthIn, G4double yLengthIn, G4double zLengthIn, G4double cubeSizeIn, G4String gridMat, G4ThreeVector gridColour, const G4ThreeVector& posOffset);
+   ~DetectionSystemGrid();
 
-    //    G4int Build(G4SDManager* mySDman);
-    G4int Build();
-    G4int PlaceDetector(G4LogicalVolume* expHallLog);
+   G4int Build();
+   G4int PlaceDetector(G4LogicalVolume* expHallLog);
 
 private:
-    // Logical volumes
-    G4LogicalVolume* fGridcellLog;
+   // Logical volumes
+   G4LogicalVolume* fGridcellLog{nullptr};
 
-    // Assembly volumes
-    G4AssemblyVolume* fAssembly;
+   // Assembly volumes
+   G4AssemblyVolume* fAssembly{nullptr};
 
-    //    SensitiveDetector* crystalBlockSD;
+   FieldSetup* fEmFieldSetup{nullptr};
 
-    FieldSetup* fEmFieldSetup;
+   G4double fXLength;
+   G4double fYLength;
+   G4double fZLength;
 
-    G4double fXLength;
-    G4double fYLength;
-    G4double fZLength;
+   G4double fXPosOffset;
+   G4double fYPosOffset;
+   G4double fZPosOffset;
 
-    G4double fXPosOffset;
-    G4double fYPosOffset;
-    G4double fZPosOffset;
+   G4double fCubeSize;
 
-    G4double fCubeSize;
+   G4int fCellsXRow;
+   G4int fCellsYRow;
+   G4int fCellsZRow;
 
-    G4int fCellsXRow;
-    G4int fCellsYRow;
-    G4int fCellsZRow;
+   G4int    fCopyNumber;
+   G4int    fNumberOfCells;
+   G4int    fCellsPerRow;
+   G4double fCellWidth;
 
+   G4String fCellMaterial;
 
-    G4int fCopyNumber;
-    G4int fNumberOfCells;
-    G4int fCellsPerRow;
-    G4double fCellWidth;
+   G4ThreeVector fCellColour;
 
-    G4String fCellMaterial;
+   G4Box* BuildCell() const;
 
-    G4ThreeVector fCellColour;
-
-    G4Box* BuildCell();
-
-    G4int BuildCellVolume();
+   G4int BuildCellVolume();
 };
 
 #endif
-

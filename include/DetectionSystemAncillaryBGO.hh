@@ -27,7 +27,7 @@
 // $Id: DetectorConstruction.hh,v 1.1 2010-10-18 15:56:17 maire Exp $
 // GEANT4 tag $Name: geant4-09-04-patch-02 $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -35,74 +35,74 @@
 #ifndef DETECTIONSYSTEMANCILLARYBGO_HH
 #define DETECTIONSYSTEMANCILLARYBGO_HH
 
-#include "G4SystemOfUnits.hh" // new version geant4.10 requires units
+#include "G4SystemOfUnits.hh"   // new version geant4.10 requires units
+#include "G4SubtractionSolid.hh"
 #include "G4IntersectionSolid.hh"
+#include "G4Tubs.hh"
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
 
 class G4AssemblyVolume;
 
-class DetectionSystemAncillaryBGO
-{
+class DetectionSystemAncillaryBGO {
 public:
-    DetectionSystemAncillaryBGO();
-    ~DetectionSystemAncillaryBGO();
-    
-    G4int Build() ; //G4SDManager* mySDman);
-    G4int PlaceDetector(G4LogicalVolume* expHallLog, G4int detectorNumber, G4double radialpos, G4int hevimetopt);
+   DetectionSystemAncillaryBGO();
+   ~DetectionSystemAncillaryBGO();
 
+   G4int Build();   //G4SDManager* mySDman);
+   G4int PlaceDetector(G4LogicalVolume* expHallLog, G4int detectorNumber, G4double radialpos, G4int hevimetopt);
 
 private:
-    // Logical volumes
-    G4LogicalVolume* fDetectorVolumeLog;
-    G4LogicalVolume* fBgoBlockLog;
-    G4LogicalVolume* fVacuumBlockLog;
-    G4LogicalVolume* fCanCylinderLog;
-    G4LogicalVolume* fCanCylinderBackCoverLog;
-    G4LogicalVolume* fHevimetBlockLog;
+   // Logical volumes
+   G4LogicalVolume* fDetectorVolumeLog{nullptr};
+   G4LogicalVolume* fBgoBlockLog{nullptr};
+   G4LogicalVolume* fVacuumBlockLog{nullptr};
+   G4LogicalVolume* fCanCylinderLog{nullptr};
+   G4LogicalVolume* fCanCylinderBackCoverLog{nullptr};
+   G4LogicalVolume* fHevimetBlockLog{nullptr};
 
-    // Assembly volumes
-    G4AssemblyVolume* fAssembly;
-    G4AssemblyVolume* fAssemblyHevimet;
+   // Assembly volumes
+   G4AssemblyVolume* fAssembly{nullptr};
+   G4AssemblyVolume* fAssemblyHevimet{nullptr};
 
-    G4double fCanLength;
-    G4double fCanThickness;
-    G4double fCanThicknessFront;
-    G4double fCanInnerRadius;
-    G4String fCanMaterial;
+   G4double fCanLength;
+   G4double fCanThickness;
+   G4double fCanThicknessFront;
+   G4double fCanInnerRadius;
+   G4String fCanMaterial;
 
-    G4double fBgoLength;
-    G4double fBgoThickness;
-    G4String fBgoMaterial;
+   G4double fBgoLength;
+   G4double fBgoThickness;
+   G4String fBgoMaterial;
 
-    G4double fGapThickness;
-    G4double fGapThicknessOuter;
-    G4String fGapMaterial;
+   G4double fGapThickness;
+   G4double fGapThicknessOuter;
+   G4String fGapMaterial;
 
-    G4double fCanFaceToBuildOrigin;
+   G4double fCanFaceToBuildOrigin;
 
-    G4double fChoppingOuterAngle;
-    G4double fChoppingInnerAngle;
+   G4double fChoppingOuterAngle;
+   G4double fChoppingInnerAngle;
 
-    G4double fHevimetThickness;
-    G4String fHevimetMaterial;
+   G4double fHevimetThickness;
+   G4String fHevimetMaterial;
 
-    G4double fDetectorAngles[8][5];
+	std::array<std::array<G4double, 5>, 8> fDetectorAngles;
 
-    G4SubtractionSolid* BGOPiece();
-    G4SubtractionSolid* VacuumPiece();
-    G4SubtractionSolid* AluminumCanPiece();
-    G4Tubs*             AluminumCanBackCover();
-    G4SubtractionSolid* HevimetPiece();
+	// private functions
+   G4SubtractionSolid* BGOPiece() const;
+   G4SubtractionSolid* VacuumPiece() const;
+   G4SubtractionSolid* AluminumCanPiece();
+   G4Tubs*             AluminumCanBackCover();
+   G4SubtractionSolid* HevimetPiece();
 
-    G4int BuildBGOVolume();
-    G4int BuildVacuumVolume();
-    G4int BuildAluminumCanVolume();
-    G4int BuildAluminumCanBackCoverVolume();
-    G4int BuildHevimetPiece();
+   G4int BuildBGOVolume();
+   G4int BuildVacuumVolume();
+   G4int BuildAluminumCanVolume();
+   G4int BuildAluminumCanBackCoverVolume();
+   G4int BuildHevimetPiece();
 
-    G4ThreeVector GetDirectionXYZ(G4double theta, G4double phi);
+   G4ThreeVector GetDirectionXYZ(G4double theta, G4double phi);
 };
 
 #endif
-

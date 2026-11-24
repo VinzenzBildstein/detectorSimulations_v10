@@ -36,104 +36,90 @@
 #define DetectionSystemTrific_HH
 
 #include "G4VUserDetectorConstruction.hh"
+#include "G4AssemblyVolume.hh"
+#include "G4VSolid.hh"
+#include "G4SystemOfUnits.hh"
 #include "globals.hh"
 
-
-
-class DetectionSystemTrific
-{
+class DetectionSystemTrific {
 public:
-    
-	DetectionSystemTrific(G4double setpressure=760,G4double setwindow=6*CLHEP::um,G4bool setal=true,G4bool setflat=true,G4double setdegrader=0,G4String degradermat="");
-	~DetectionSystemTrific();
+   explicit DetectionSystemTrific(G4double setpressure = 760, G4double setwindow = 6 * CLHEP::um, G4bool setal = true, G4bool setflat = true, G4double setdegrader = 0, G4String degradermat = "");
+   ~DetectionSystemTrific() = default;
 
-	//------------------------------------------------//
-	// logical and physical volumes
-	//------------------------------------------------//
-public:
-	G4int BuildPlace(G4LogicalVolume* ExpHallLog);
-
+   G4int BuildPlace(G4LogicalVolume* ExpHallLog);
 
 private:
+   //------------------------------------------------//
+   // logical and physical volumes
+   //------------------------------------------------//
+   G4LogicalVolume* fGasCell{nullptr};
+   G4AssemblyVolume* fGridPCB{nullptr};
 
-	G4LogicalVolume* fGasCell;
-// 	G4LogicalVolume* fAnnularClampLog;
-// 	std::vector<G4LogicalVolume*> fSiliLog;
-// 
-// 	G4VPhysicalVolume* fDetectorMountPhys;
-// 	G4VPhysicalVolume* fAnnularClampPhys;
-	G4AssemblyVolume* fGridPCB;
+   //--------------------------------------------------------//
+   // Trific physical properties
+   //--------------------------------------------------------//
+   G4String fWireMaterial;
+   G4String fPCBMaterial;
+   G4String fChamberMaterial;
+   G4String fWindowFrameMaterial;
+   G4String fWindowMaterial;
+   G4String fWindowSurfaceMaterial;
+   G4String fGasMaterial;
+   G4String fDegraderMaterial;
 
-	//--------------------------------------------------------//
-	// Trific physical properties
-	//--------------------------------------------------------//
-	G4String fWireMaterial;
-	G4String fPCBMaterial;
-	G4String fChamberMaterial;
-	G4String fWindowFrameMaterial;
-	G4String fWindowMaterial;
-	G4String fWindowSurfaceMaterial;
-	G4String fGasMaterial;
-	G4String fDegraderMaterial;
+   // ----------------------------
+   // Dimensions of Detector
+   // ----------------------------
+   G4double fChamberLength;
+   G4double fPCBThickness;
+   G4double fGridAngle;
+   G4double fSpacerZThickness;
+   G4double fGridSpacing;
+   G4double fWireD;
+   G4double fWirePitch;
+   G4double fChamberInnerD;
+   G4double fChamberOuterD;
+   G4double fPCBInnerD;
+   G4double fPCBOuterD;
+   G4double fPCBCutDepth;
+   G4double fPCBCutHalfHeight;
+   G4double fRodD;
+   G4double fRodPlaceD;
 
+   G4int              fYgrid;
+   std::vector<G4int> fYwires;
+   G4int              fXgrid;
+   std::vector<G4int> fXwires;
 
-	// ----------------------------
-	// Dimensions of Detector
-	// ----------------------------
-	G4double fChamberLength;
-	G4double fPCBThickness;
-	G4double fGridAngle;
-	G4double fSpacerZThickness;
-	G4double fGridSpacing;
-	G4double fWireD;
-	G4double fWirePitch;
-	G4double fChamberInnerD;
-	G4double fChamberOuterD;
-	G4double fPCBInnerD;
-	G4double fPCBOuterD;
-	G4double fPCBCutDepth;
-	G4double fPCBCutHalfHeight;
-	G4double fRodD;
-	G4double fRodPlaceD;
+   G4double fTargetChamberZOffset;
+   G4double fChamberWindowZ;
+   G4double fWindowGridZ;
+   G4double fWindowWasherZ;
+   G4double fWindowThickness;
+   G4double fWindowCoatingThickness;
+   G4double fWindowInnerD;
+   G4double fWindowOuterD;
+   G4double fWindowChamberLength;
+   G4double fWindowPipeInnerD;
 
-	G4int fYgrid;
-	std::vector<G4int> fYwires;
-	G4int fXgrid;
-	std::vector<G4int> fXwires;
-    
-    
-	G4double fTargetChamberZOffset;
-	G4double fChamberWindowZ;
-	G4double fWindowGridZ;
-	G4double fWindowWasherZ;
-	G4double fWindowThickness;
-	G4double fWindowCoatingThickness;
-	G4double fWindowInnerD;
-	G4double fWindowOuterD;
-	G4double fWindowChamberLength;
-	G4double fWindowPipeInnerD;
-	
-	G4double fDegraderThickness;
-    
-    G4bool fFlatWindow;
-    G4bool fAluminised;
-    
-	
-	//------------------------------------------------//
-	// internal methods in Build()
-	//------------------------------------------------//
-private:
+   G4double fDegraderThickness;
 
-	void 	BuildPCB();
-	void 	PlacePCBs(G4LogicalVolume*);
-    G4VSolid* GasCell(int N=1);
-	void 	BuildPlaceYSense(G4LogicalVolume*);
-	void 	BuildPlaceXSense(G4LogicalVolume*);
-	void 	BuildPlaceWindow(G4LogicalVolume*);
-	void 	BuildPlaceFlatWindow(G4LogicalVolume*);
-	void 	BuildPlacePipe(G4LogicalVolume*);
-	void 	BuildGasVolume(G4LogicalVolume*);
-// 	void BuildPCB(G4LogicalVolume* ExpHallLog); 
+   G4bool fFlatWindow;
+   G4bool fAluminised;
+
+   //------------------------------------------------//
+   // internal methods in Build()
+   //------------------------------------------------//
+   void      BuildPCB();
+   void      PlacePCBs(G4LogicalVolume*);
+   G4VSolid* GasCell(int N = 1) const;
+   void      BuildPlaceYSense(G4LogicalVolume*);
+   void      BuildPlaceXSense(G4LogicalVolume*);
+   void      BuildPlaceWindow(G4LogicalVolume*);
+   void      BuildPlaceFlatWindow(G4LogicalVolume*);
+   void      BuildPlacePipe(G4LogicalVolume*);
+   void      BuildGasVolume(G4LogicalVolume*);
+   // 	void BuildPCB(G4LogicalVolume* ExpHallLog);
 };
 
 #endif

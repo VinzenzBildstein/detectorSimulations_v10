@@ -35,71 +35,67 @@
 #ifndef DETECTIONSYSTEMS3_HH
 #define DETECTIONSYSTEMS3_HH
 
+#include "G4ThreeVector.hh"
+#include "G4Tubs.hh"
+#include "G4AssemblyVolume.hh"
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
 
-#define ALCOL 0.5,0.5,0.5
+#define ALCOL 0.5, 0.5, 0.5
 
-class DetectionSystemS3
-{
+class DetectionSystemS3 {
 public:
-    DetectionSystemS3();
-    ~DetectionSystemS3();
+   DetectionSystemS3();
+   ~DetectionSystemS3();
 
-    //------------------------------------------------//
-    // logical and physical volumes
-    //------------------------------------------------//
-private:
-    G4AssemblyVolume* fAssembly;
-    G4AssemblyVolume* fAssemblyS3Ring[24];
-
-public:
-    G4int Build();
-    G4int PlaceDetector(G4LogicalVolume* expHallLog, G4ThreeVector move,
-                        G4int ringNumber, G4int nRadSeg, G4int detectorNumber);
-    G4int PlaceGuardRing(G4LogicalVolume* expHallLog, G4ThreeVector move);
+   G4int Build();
+   G4int PlaceDetector(G4LogicalVolume* expHallLog, G4ThreeVector move,
+                       G4int ringNumber, G4int nRadSeg, G4int detectorNumber);
+   G4int PlaceGuardRing(G4LogicalVolume* expHallLog, G4ThreeVector move);
 
 private:
-    G4ThreeVector GetDirectionXYZ(G4double theta, G4double phi);
+   //------------------------------------------------//
+   // logical and physical volumes
+   //------------------------------------------------//
+   G4AssemblyVolume* fAssembly{nullptr};
+	std::array<G4AssemblyVolume*, 24> fAssemblyS3Ring;
 
-    G4LogicalVolume* fS3InnerGuardRingLog;
-    G4LogicalVolume* fS3OuterGuardRingLog;
-    G4LogicalVolume* fSiDetS3RingLog[24];
+   G4ThreeVector GetDirectionXYZ(G4double theta, G4double phi);
 
-    //--------------------------------------------------------//
-    // SPICE physical properties
-    // OBS: crystal properties are public, others are private
-    //--------------------------------------------------------//
-private:
-    G4String fWaferMaterial;
+   G4LogicalVolume* fS3InnerGuardRingLog{nullptr};
+   G4LogicalVolume* fS3OuterGuardRingLog{nullptr};
+	std::array<G4LogicalVolume*, 24> fSiDetS3RingLog;
 
-    //-----------------------------//
-    // parameters for the annular  //
-    // planar detector crystal     //
-    //-----------------------------//
-public:
-    G4double fS3DetCrystalThickness;
-    G4double fS3DetCrystalOuterDiameter;
-    G4double fS3DetCrystalInnerDiameter;
-    G4double fS3DetRadialSegments;
-    G4double fS3DetPhiSegments;
+   //--------------------------------------------------------//
+   // SPICE physical properties
+   // OBS: crystal properties are public, others are private
+   //--------------------------------------------------------//
+   G4String fWaferMaterial;
 
-    //-------------------------------//
-    // parameters for the guard ring //
-    //-------------------------------//
-private:
-    G4double fS3DetGuardRingInnerDiameter;
-    G4double fS3DetGuardRingOuterDiameter;
+   //-----------------------------//
+   // parameters for the annular  //
+   // planar detector crystal     //
+   //-----------------------------//
+   G4double fS3DetCrystalThickness;
+   G4double fS3DetCrystalOuterDiameter;
+   G4double fS3DetCrystalInnerDiameter;
+   G4double fS3DetRadialSegments;
+   G4double fS3DetPhiSegments;
 
-    //------------------------------------------------//
-    // internal methods in Build()
-    //------------------------------------------------//
-private:
-    G4int BuildSiliconWafer(G4int ringID);
-    G4int BuildInnerGuardRing();
-    G4int BuildOuterGuardRing();
+   //-------------------------------//
+   // parameters for the guard ring //
+   //-------------------------------//
+   G4double fS3DetGuardRingInnerDiameter;
+   G4double fS3DetGuardRingOuterDiameter;
 
-    G4Tubs*             BuildCrystal(G4int myRingID);
+   //------------------------------------------------//
+   // internal methods in Build()
+   //------------------------------------------------//
+   G4int BuildSiliconWafer(G4int ringID);
+   G4int BuildInnerGuardRing();
+   G4int BuildOuterGuardRing();
+
+   G4Tubs* BuildCrystal(G4int myRingID);
 };
 
 #endif

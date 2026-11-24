@@ -61,56 +61,45 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 PhysListParticles::PhysListParticles(const G4String& name)
-:  G4VPhysicsConstructor(name)
-{}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-PhysListParticles::~PhysListParticles()
+   : G4VPhysicsConstructor(name)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void PhysListParticles::ConstructParticle()
 {
+   // pseudo-particles
+   G4Geantino::GeantinoDefinition();
+   G4ChargedGeantino::ChargedGeantinoDefinition();
 
-	// pseudo-particles
-	G4Geantino::GeantinoDefinition();
-	G4ChargedGeantino::ChargedGeantinoDefinition();
+   // gamma
+   G4Gamma::GammaDefinition();
 
-	// gamma
-	G4Gamma::GammaDefinition();
+   // optical photon
+   G4OpticalPhoton::OpticalPhotonDefinition();
 
-	// optical photon
-	G4OpticalPhoton::OpticalPhotonDefinition();
+   // leptons
+   G4Electron::ElectronDefinition();
+   G4Positron::PositronDefinition();
+   G4MuonPlus::MuonPlusDefinition();
+   G4MuonMinus::MuonMinusDefinition();
 
-	// leptons
-	G4Electron::ElectronDefinition();
-	G4Positron::PositronDefinition();
-	G4MuonPlus::MuonPlusDefinition();
-	G4MuonMinus::MuonMinusDefinition();
+   G4NeutrinoE::NeutrinoEDefinition();
+   G4AntiNeutrinoE::AntiNeutrinoEDefinition();
+   G4NeutrinoMu::NeutrinoMuDefinition();
+   G4AntiNeutrinoMu::AntiNeutrinoMuDefinition();
 
-	G4NeutrinoE::NeutrinoEDefinition();
-	G4AntiNeutrinoE::AntiNeutrinoEDefinition();
-	G4NeutrinoMu::NeutrinoMuDefinition();
-	G4AntiNeutrinoMu::AntiNeutrinoMuDefinition();
+   // mesons
+	G4MesonConstructor::ConstructParticle();
 
-	// mesons
-	G4MesonConstructor mConstructor;
-	mConstructor.ConstructParticle();
+   // barions
+	G4BaryonConstructor::ConstructParticle();
 
-	// barions
-	G4BaryonConstructor bConstructor;
-	bConstructor.ConstructParticle();
+   // ions
+	G4IonConstructor::ConstructParticle();
 
-	// ions
-	G4IonConstructor iConstructor;
-	iConstructor.ConstructParticle();
-
-	//  Construct  resonaces and quarks
-	G4ShortLivedConstructor pShortLivedConstructor;
-	pShortLivedConstructor.ConstructParticle();
-
+   //  Construct  resonaces and quarks
+	G4ShortLivedConstructor::ConstructParticle();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

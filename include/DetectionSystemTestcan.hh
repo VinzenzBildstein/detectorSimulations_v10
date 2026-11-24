@@ -35,53 +35,51 @@
 #ifndef DETECTIONSYSTEMTESTCAN_HH
 #define DETECTIONSYSTEMTESTCAN_HH
 
-#include "G4SystemOfUnits.hh" // new version geant4.10 requires units
+#include "G4SystemOfUnits.hh"   // new version geant4.10 requires units
 #include "G4VUserDetectorConstruction.hh"
+#include "G4Colour.hh"
 #include "globals.hh"
 
 class G4AssemblyVolume;
 
-class DetectionSystemTestcan
-{
+class DetectionSystemTestcan {
 public:
-    DetectionSystemTestcan(G4double length, G4double radius);
-    ~DetectionSystemTestcan();
+   DetectionSystemTestcan(G4double length, G4double radius);
+   ~DetectionSystemTestcan();
 
-    G4int Build();
-    G4int PlaceDetector(G4LogicalVolume* expHallLog);
+   G4int Build();
+   G4int PlaceDetector(G4LogicalVolume* expHallLog);
 
 private:
-    // Logical volumes
-    G4LogicalVolume* fTestcanAlumCasingLog;
-    G4LogicalVolume* fTestcanScintillatorLog;   
-    G4LogicalVolume* fTestcanQuartzWindowLog;
+   // Logical volumes
+   G4LogicalVolume* fTestcanAlumCasingLog{nullptr};
+   G4LogicalVolume* fTestcanScintillatorLog{nullptr};
+   G4LogicalVolume* fTestcanQuartzWindowLog{nullptr};
 
-    // Assembly volumes
-    G4AssemblyVolume* fAssemblyTestcan;                 // Contains all non-sensitive materials
+   // Assembly volumes
+   G4AssemblyVolume* fAssemblyTestcan{nullptr};   // Contains all non-sensitive materials
 
-    G4double fScintillatorLength;
-    G4double fScintillatorInnerRadius;
-    G4double fScintillatorOuterRadius;
+   G4double fScintillatorLength;
+   G4double fScintillatorInnerRadius;
+   G4double fScintillatorOuterRadius;
 
-    G4double fAlumCanThickness;
-    G4double fQuartzThickness;
-    G4double fQuartzRadius;
+   G4double fAlumCanThickness;
+   G4double fQuartzThickness;
+   G4double fQuartzRadius;
 
-    G4double fStartPhi;
-    G4double fEndPhi;
+   G4double fStartPhi;
+   G4double fEndPhi;
 
-    G4String fCanMaterial;
-    G4String fLiquidMaterial;
-    G4String fQuartzMaterial;
+   G4String fCanMaterial;
+   G4String fLiquidMaterial;
+   G4String fQuartzMaterial;
 
-    // The colours of the detectors
-    G4Colour fLiquidColour; // Scintillator colour
-    G4Colour fGreyColour;   // can colour
-    G4Colour fQuartzColour;
+   // The colours of the detectors
+   G4Colour fLiquidColour;   // Scintillator colour
+   G4Colour fGreyColour;     // can colour
+   G4Colour fQuartzColour;
 
-    G4int BuildTestcan();
-
+   G4int BuildTestcan();
 };
 
 #endif
-

@@ -29,7 +29,7 @@
 //
 // $Id: SteppingAction.hh 68015 2013-03-13 13:27:27Z gcosmo $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -45,17 +45,16 @@ class EventAction;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class SteppingAction : public G4UserSteppingAction
-{
+class SteppingAction : public G4UserSteppingAction {
 public:
-    SteppingAction(DetectorConstruction*, EventAction*);
-    virtual ~SteppingAction();
+   SteppingAction(DetectorConstruction*, EventAction*);
+   ~SteppingAction() = default;
 
-    virtual void UserSteppingAction(const G4Step*);
-    
+   void UserSteppingAction(const G4Step*) override;
+
 private:
-    DetectorConstruction* fDetector;
-    EventAction*          fEventAction;
+   DetectorConstruction* fDetector{nullptr};
+   EventAction*          fEventAction{nullptr};
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

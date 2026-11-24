@@ -17,47 +17,45 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HistoMessenger::HistoMessenger(HistoManager* hist)
-:fHist(hist)
+   : fHist(hist), fDir(new G4UIdirectory("/Histo/")),
+     fRecordGunCmd(new G4UIcmdWithABool("/Histo/RecordGun", this)),
+     fRecordAllCmd(new G4UIcmdWithABool("/Histo/RecordAll", this)),
+     fFileNameCmd(new G4UIcmdWithAString("/Histo/FileName", this))
 {
-	fDir = new G4UIdirectory("/Histo/");
-	fDir->SetGuidance("UI commands for histo manager");
-    
-	fRecordGunCmd = new G4UIcmdWithABool("/Histo/RecordGun",this);
-	fRecordGunCmd->SetGuidance("Record the particle for each event in the tree");
-	fRecordGunCmd->AvailableForStates(G4State_PreInit,G4State_Idle); 
-    
-	fRecordAllCmd = new G4UIcmdWithABool("/Histo/RecordAll",this);
-	fRecordAllCmd->SetGuidance("Record each generated event in the tree (and not only those hitting detectors)");
-	fRecordAllCmd->AvailableForStates(G4State_PreInit,G4State_Idle); 
+   fDir->SetGuidance("UI commands for histo manager");
 
-	fFileNameCmd = new G4UIcmdWithAString("/Histo/FileName", this);
-	fFileNameCmd->SetGuidance("Set output file name, default is g4out. Warning, .root or _tX.root will automatically be added!");
-	fFileNameCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+   fRecordGunCmd->SetGuidance("Record the particle for each event in the tree");
+   fRecordGunCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+
+   fRecordAllCmd->SetGuidance("Record each generated event in the tree (and not only those hitting detectors)");
+   fRecordAllCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+
+   fFileNameCmd->SetGuidance("Set output file name, default is g4out. Warning, .root or _tX.root will automatically be added!");
+   fFileNameCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 }
 
 HistoMessenger::~HistoMessenger()
 {
-	delete fDir;
-	delete fRecordGunCmd;
-	delete fRecordAllCmd;
-	delete fFileNameCmd;
+   delete fDir;
+   delete fRecordGunCmd;
+   delete fRecordAllCmd;
+   delete fFileNameCmd;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void HistoMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 {
-	if(command == fRecordGunCmd) {
-		fHist->RecordGun(fRecordGunCmd->GetNewBoolValue(newValue));
-		return;
-	}
-	if(command == fRecordAllCmd) {
-		fHist->RecordAll(fRecordAllCmd->GetNewBoolValue(newValue));
-		return;
-	}
-	if(command == fFileNameCmd) {
-		fHist->FileName(newValue);
-		return;
-	}
+   if(command == fRecordGunCmd) {
+      fHist->RecordGun(G4UIcmdWithABool::GetNewBoolValue(newValue));
+      return;
+   }
+   if(command == fRecordAllCmd) {
+      fHist->RecordAll(G4UIcmdWithABool::GetNewBoolValue(newValue));
+      return;
+   }
+   if(command == fFileNameCmd) {
+      fHist->FileName(newValue);
+      return;
+   }
 }
-

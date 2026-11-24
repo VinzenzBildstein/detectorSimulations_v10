@@ -27,13 +27,16 @@
 // $Id: DetectorConstruction.hh,v 1.1 2010-10-18 15:56:17 maire Exp $
 // GEANT4 tag $Name: geant4-09-04-patch-02 $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #ifndef APPARATUS8PIVACUUMCHAMBERAUXMATSHELL_HH
 #define APPARATUS8PIVACUUMCHAMBERAUXMATSHELL_HH
+
+#include "G4Types.hh"
+#include "G4String.hh"
 
 class G4LogicalVolume;
 class G4VPhysicalVolume;
@@ -43,41 +46,39 @@ class DetectorMessenger;
 ///////////////////////////////////////////////////////////////////////
 // Apparatus8piVacuumChamberAuxMatShell
 ///////////////////////////////////////////////////////////////////////
-class Apparatus8piVacuumChamberAuxMatShell
-{
+class Apparatus8piVacuumChamberAuxMatShell {
 public:
-    Apparatus8piVacuumChamberAuxMatShell();
-    ~Apparatus8piVacuumChamberAuxMatShell();
+   Apparatus8piVacuumChamberAuxMatShell();
+   ~Apparatus8piVacuumChamberAuxMatShell();
 
-    void Build(G4LogicalVolume*, G4double);
+   void Build(G4LogicalVolume*, G4double);
 
 private:
-    G4LogicalVolume* fExpHallLog;
+   G4LogicalVolume* fExpHallLog{nullptr};
 
-    // LogicalVolumes used in Apparatus8piVacuumChamberAuxMatShell()
+   // LogicalVolumes used in Apparatus8piVacuumChamberAuxMatShell()
 
-    G4LogicalVolume* fVacuumChamberAuxSphereLog;
+   G4LogicalVolume* fVacuumChamberAuxSphereLog{nullptr};
 
-    // Physical Volumes used in Apparatus8piVacuumChamberAuxMatShell()
+   // Physical Volumes used in Apparatus8piVacuumChamberAuxMatShell()
 
-    G4VPhysicalVolume* fVacuumChamberSpherePhys;
+   G4VPhysicalVolume* fVacuumChamberSpherePhys{nullptr};
 
-    ///////////////////////////////////////////////////////////////////
-    // Apparatus8piVacuumChamberAuxMatShellCylinder Properties
-    ///////////////////////////////////////////////////////////////////
+   ///////////////////////////////////////////////////////////////////
+   // Apparatus8piVacuumChamberAuxMatShellCylinder Properties
+   ///////////////////////////////////////////////////////////////////
 
-    // Materials
-    G4String fVacuumChamberSphereMaterial;
+   // Materials
+   G4String fVacuumChamberSphereMaterial;
 
-    // Dimensions
-    G4double fVacuumChamberOuterRadius;
+   // Dimensions
+   G4double fVacuumChamberOuterRadius{0.};
 
-    // internal methods for ConstructApparatus8piVacuumChamberAuxMatShell() for Building
-    void BuildApparatus8piVacuumChamberAuxMatShellSphere(G4double thickness);
+   // internal methods for ConstructApparatus8piVacuumChamberAuxMatShell() for Building
+   void BuildApparatus8piVacuumChamberAuxMatShellSphere(G4double thickness);
 
-    // internal methods for ConstructApparatus8piVacuumChamberAuxMatShell() for Placing
-    void PlaceApparatus8piVacuumChamberAuxMatShellSphere();
-    
+   // internal methods for ConstructApparatus8piVacuumChamberAuxMatShell() for Placing
+   void PlaceApparatus8piVacuumChamberAuxMatShellSphere();
 };
 
 #endif

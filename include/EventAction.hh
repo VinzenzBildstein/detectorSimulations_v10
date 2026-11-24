@@ -29,7 +29,7 @@
 //
 // $Id: EventAction.hh 68015 2013-03-13 13:27:27Z gcosmo $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -41,59 +41,59 @@
 #include "globals.hh"
 #include "HistoManager.hh"
 
-#include "DetectorConstruction.hh" // for DetectorProperties
+#include "DetectorConstruction.hh"   // for DetectorProperties
 
 class RunAction;
 class HistoManager;
 
-static const int MAXSTEPS       = 1000;
-static const int MAXHITS        = 100;
-static const int NUMSTEPVARS    = 15;
+static const int MAXSTEPS    = 1000;
+static const int MAXHITS     = 100;
+static const int NUMSTEPVARS = 15;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class EventAction : public G4UserEventAction
-{
+class EventAction : public G4UserEventAction {
 public:
-	EventAction(RunAction*, HistoManager*);
-	virtual ~EventAction();
+   EventAction(RunAction*, HistoManager*);
+   ~EventAction() = default;
 
-	virtual void  BeginOfEventAction(const G4Event*);
-	virtual void    EndOfEventAction(const G4Event*);
+   void BeginOfEventAction(const G4Event*) override;
+   void EndOfEventAction(const G4Event*) override;
 
-	G4int GetEventNumber() { return fEvtNb;};
+   G4int GetEventNumber() const { return fEvtNb; };
 
-	void AddHitTracker(const DetectorProperties& properties, const G4int& eventNumber, const G4int& trackID, const G4int& parentID, const G4int& stepNumber, const G4int& particleType, const G4int& processType, const G4double& depEnergy, const G4ThreeVector& pos, const G4double& time, const G4int& trackerZ, const G4double& kinEnergy);
-	void AddStepTracker(const DetectorProperties& properties, const G4int& eventNumber, const G4int& trackID, const G4int& parentID, const G4int& stepNumber, const G4int& particleType, const G4int& processType, const G4double& depEnergy, const G4ThreeVector& pos, const G4double& time, const G4int& trackerZ);
+   void AddHitTracker(const DetectorProperties& properties, const G4int& eventNumber, const G4int& trackID, const G4int& parentID, const G4int& stepNumber, const G4int& particleType, const G4int& processType, const G4double& depEnergy, const G4ThreeVector& pos, const G4double& time, const G4int& targetZ, const G4double& kinEnergy);
+   void AddStepTracker(const DetectorProperties& properties, const G4int& eventNumber, const G4int& trackID, const G4int& parentID, const G4int& stepNumber, const G4int& particleType, const G4int& processType, const G4double& depEnergy, const G4ThreeVector& pos, const G4double& time, const G4int& targetZ);
 
-	G4bool SpiceTest();
+   G4bool SpiceTest();
+
 private:
-	RunAction*    fRunAction;
-	HistoManager* fHistoManager;
+   RunAction*    fRunAction;
+   HistoManager* fHistoManager;
 
-	G4int     fPrintModulo;
-	G4int     fEvtNb;
+   G4int fPrintModulo;
+   G4int fEvtNb;
 
-	void ClearVariables();
+   void ClearVariables();
 
-	//Applying a resolution to SPCIE energies if desired
-	G4double fAmp[10000];//Bin amp (effective y)
-	G4double fAmpx[10000];
-	G4double fAmpTot;
+   //Applying a resolution to SPCIE energies if desired
+	std::array<G4double, 10000> fAmp;   //Bin amp (effective y)
+   std::array<G4double, 10000> fAmpx;
+   G4double fAmpTot;
 
-	// Tracking info
-	G4int    fHitTrackerI[NUMSTEPVARS][MAXHITS];
-	G4double fHitTrackerD[NUMSTEPVARS][MAXHITS];
-	G4int    fNumberOfHits;
-	DetectorProperties fProperties[MAXHITS];
+   // Tracking info
+	std::array<std::array<G4int, MAXHITS>, NUMSTEPVARS>              fHitTrackerI;
+	std::array<std::array<G4double, MAXHITS>, NUMSTEPVARS>           fHitTrackerD;
+   G4int              fNumberOfHits;
+	std::array<DetectorProperties, MAXHITS> fProperties;
 
-	G4int    fStepTrackerI[NUMSTEPVARS][MAXSTEPS];
-	G4double fStepTrackerD[NUMSTEPVARS][MAXSTEPS];
-	G4int    fNumberOfSteps;
+	std::array<std::array<G4int, MAXHITS>, NUMSTEPVARS>    fStepTrackerI;
+	std::array<std::array<G4double, MAXHITS>, NUMSTEPVARS> fStepTrackerD;
+   G4int    fNumberOfSteps;
 
-	// Energy deposit in detection systems
-	G4double fSpiceEnergyDet[10][12];
-	G4double fSpiceTrackDet[10][12];
+   // Energy deposit in detection systems
+	std::array<std::array<G4double, 12>, 10> fSpiceEnergyDet;
+	std::array<std::array<G4double, 12>, 10> fSpiceTrackDet;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

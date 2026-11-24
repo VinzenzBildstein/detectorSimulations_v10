@@ -48,34 +48,27 @@
 #include "G4NeutronFissionProcess.hh"
 #include "G4NeutronCaptureProcess.hh"
 
-
-class PhysListHadron : public G4VPhysicsConstructor
-{
+class PhysListHadron : public G4VPhysicsConstructor {
 public:
-    PhysListHadron(const G4String& name = "hadron");
-    virtual ~PhysListHadron();
+   explicit PhysListHadron(const G4String& name = "hadron");
+   ~PhysListHadron() = default;
 
-public:
-    // Construct particle and physics
-    virtual void ConstructParticle() {};
-    //
-    virtual void ConstructProcess();
+   // Construct particle and physics
+   void ConstructParticle() override {}
+   void ConstructProcess() override;
 
 private:
-
-    G4HadronElasticProcess fTheElasticProcess;
-    G4HadronElasticProcess fIonElasticProcess;
-    G4HadronElasticProcess* fTheNeutronElasticProcess;
-    G4NeutronFissionProcess* fTheFissionProcess;
-    G4NeutronCaptureProcess* fTheCaptureProcess;
-    G4HadronInelasticProcess* fTheProtonInelastic;
-    G4HadronInelasticProcess* fTheNeutronInelastic;
-    G4HadronInelasticProcess* fTheDeuteronInelasticProcess;
-    G4HadronInelasticProcess* fTheTritonInelasticProcess;
-    G4HadronInelasticProcess* fTheAlphaInelasticProcess;
-    G4HadronInelasticProcess* fTheIonInelasticProcess;
+   G4HadronElasticProcess    fTheElasticProcess;
+   G4HadronElasticProcess    fIonElasticProcess;
+   G4HadronElasticProcess*   fTheNeutronElasticProcess{nullptr};
+   G4NeutronFissionProcess*  fTheFissionProcess{nullptr};
+   G4NeutronCaptureProcess*  fTheCaptureProcess{nullptr};
+   G4HadronInelasticProcess* fTheProtonInelastic{nullptr};
+   G4HadronInelasticProcess* fTheNeutronInelastic{nullptr};
+   G4HadronInelasticProcess* fTheDeuteronInelasticProcess{nullptr};
+   G4HadronInelasticProcess* fTheTritonInelasticProcess{nullptr};
+   G4HadronInelasticProcess* fTheAlphaInelasticProcess{nullptr};
+   G4HadronInelasticProcess* fTheIonInelasticProcess{nullptr};
 };
 
 #endif
-
-

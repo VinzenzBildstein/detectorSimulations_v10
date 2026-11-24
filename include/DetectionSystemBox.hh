@@ -27,7 +27,7 @@
 // $Id: DetectorConstruction.hh,v 1.1 2010-10-18 15:56:17 maire Exp $
 // GEANT4 tag $Name: geant4-09-04-patch-02 $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -35,53 +35,51 @@
 #ifndef DETECTIONSYSTEMBOX_HH
 #define DETECTIONSYSTEMBOX_HH
 
+#include "G4ThreeVector.hh"
+#include "G4Box.hh"
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
 
 class G4AssemblyVolume;
 
-class DetectionSystemBox
-{
+class DetectionSystemBox {
 public:
-    DetectionSystemBox(G4double xLengthIn, G4double yLengthIn, G4double zLengthIn, G4double thicknessIn, G4String boxMat, G4ThreeVector boxColour);
-    ~DetectionSystemBox();
+   DetectionSystemBox(G4double xLengthIn, G4double yLengthIn, G4double zLengthIn, G4double thicknessIn, G4String boxMat, G4ThreeVector boxColour);
+   ~DetectionSystemBox();
 
-    //    G4int Build(G4SDManager* mySDman);
-    G4int Build();
-    G4int PlaceDetector(G4LogicalVolume* expHallLog);
+   //    G4int Build(G4SDManager* mySDman);
+   G4int Build();
+   G4int PlaceDetector(G4LogicalVolume* expHallLog);
 
 private:
-    // Logical volumes
-    G4LogicalVolume* fCellLog;
-    G4LogicalVolume* fSideNormXLog;
-    G4LogicalVolume* fSideNormYLog;
-    G4LogicalVolume* fSideNormZLog;
+   // Logical volumes
+   G4LogicalVolume* fCellLog{nullptr};
+   G4LogicalVolume* fSideNormXLog{nullptr};
+   G4LogicalVolume* fSideNormYLog{nullptr};
+   G4LogicalVolume* fSideNormZLog{nullptr};
 
+   // Assembly volumes
+   G4AssemblyVolume* fAssembly{nullptr};
 
-    // Assembly volumes
-    G4AssemblyVolume* fAssembly;
+   G4int fCopyNumber;
 
-    //    SensitiveDetector* crystalBlockSD;
+   G4double fXLength;
+   G4double fYLength;
+   G4double fZLength;
+   G4double fThickness;
 
-    G4int fCopyNumber;
+   G4String fCellMaterial;
 
-    G4double fXLength;
-    G4double fYLength;
-    G4double fZLength;
-    G4double fThickness;
+   G4ThreeVector fCellColour;
 
-    G4String fCellMaterial;
+	// private functions
+   G4Box* BuildXNormalSide() const;
+   G4Box* BuildYNormalSide() const;
+   G4Box* BuildZNormalSide() const;
 
-    G4ThreeVector fCellColour;
-
-    G4Box* BuildXNormalSide();
-    G4Box* BuildYNormalSide();
-    G4Box* BuildZNormalSide();
-
-    G4int BuildXNormalVolumes();
-    G4int BuildYNormalVolumes();
-    G4int BuildZNormalVolumes();
+   G4int BuildXNormalVolumes();
+   G4int BuildYNormalVolumes();
+   G4int BuildZNormalVolumes();
 };
 
 #endif
-

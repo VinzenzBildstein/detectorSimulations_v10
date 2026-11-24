@@ -84,18 +84,18 @@ int main(int argc, char** argv)
 		nThreads = strtol(argv[2], nullptr, 10);
 	}
 	G4cout<<"RUNNING MULTITHREADED WITH "<<nThreads<<" THREADS"<<G4endl;
-	G4MTRunManager* runManager = new G4MTRunManager;
+	auto* runManager = new G4MTRunManager;
 	runManager->SetNumberOfThreads(nThreads);
 #else
 	G4cout<<"NOT RUNNING MULTITHREADED"<<G4endl;
-	G4RunManager* runManager = new G4RunManager;
+	auto* runManager = new G4RunManager;
 #endif
 
 	// turn off messages from particle HP manager (/process/had/particle_hp/verbose command does not work?)
 	G4ParticleHPManager::GetInstance()->SetVerboseLevel(0);
 
 	// Set mandatory initialization classes
-	DetectorConstruction* detector = new DetectorConstruction;
+	auto* detector = new DetectorConstruction;
 	runManager->SetUserInitialization(detector);
 	runManager->SetUserInitialization(new PhysicsList);
 	runManager->SetUserInitialization(new ActionInitialization(detector));
@@ -113,7 +113,7 @@ int main(int argc, char** argv)
 		G4String fileName = argv[1];
 		UImanager->ApplyCommand(command+fileName);
 	} else { // interactive mode : define visualization and UI terminal
-		G4UIExecutive* ui = new G4UIExecutive(argc, argv);
+		auto* ui = new G4UIExecutive(argc, argv);
 		UImanager->ApplyCommand("/control/execute vis.mac");
 
 		ui->SessionStart();

@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------------
 # Setup the project
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 project(Griffinv10)
 
 set(CMAKE_BUILD_TYPE Debug)
@@ -73,7 +73,7 @@ endif()
 # Add g4tools/hbook sources
 #
 
-if (HBOOK_FOUND)
+if(HBOOK_FOUND)
   include_directories(
        ${PROJECT_SOURCE_DIR}/../../common/analysis/include)
 
@@ -124,3 +124,10 @@ endforeach()
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS Griffinv10 DESTINATION bin)
+
+#----------------------------------------------------------------------------
+# create a compile_commands.json file which can be used for clang-tidy
+if(NOT DEFINED ENV{CMAKE_EXPORT_COMPILE_COMMANDS})
+	message("ENV(CMAKE_EXPORT_COMPILE_COMMANDS) NOT DEFINED, setting it to TRUE")
+	set($ENV{CMAKE_EXPORT_COMPILE_COMMANDS} TRUE)
+endif()

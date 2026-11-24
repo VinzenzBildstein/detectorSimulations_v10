@@ -38,19 +38,16 @@ class DetectorConstruction;
 /// Action initialization class.
 ///
 
-class ActionInitialization : public G4VUserActionInitialization
-{
+class ActionInitialization : public G4VUserActionInitialization {
 public:
-    ActionInitialization(DetectorConstruction* detector);
-    virtual ~ActionInitialization();
+   explicit ActionInitialization(DetectorConstruction* detector);
+   virtual ~ActionInitialization() = default;
 
-    virtual void BuildForMaster() const;
-    virtual void Build() const;
+   void BuildForMaster() const override;
+   void Build() const override;
 
 private:
-    DetectorConstruction* fDetector;
+   DetectorConstruction* fDetector;
 };
 
 #endif
-
-

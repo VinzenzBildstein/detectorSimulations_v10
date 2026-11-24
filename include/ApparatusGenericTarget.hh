@@ -27,42 +27,44 @@
 // $Id: DetectorConstruction.hh,v 1.1 2010-10-18 15:56:17 maire Exp $
 // GEANT4 tag $Name: geant4-09-04-patch-02 $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#ifndef ApparatusGenericTarget_h
-#define ApparatusGenericTarget_h 1
+#ifndef APPARATUSGENERICTARGET_HH
+#define APPARATUSGENERICTARGET_HH
 
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
+#include "G4ThreeVector.hh"
+#include "G4Box.hh"
+#include "G4RotationMatrix.hh"
+#include "G4AssemblyVolume.hh"
 
-class ApparatusGenericTarget
-{
-  public:
-    ApparatusGenericTarget();
-    ~ApparatusGenericTarget();
+class ApparatusGenericTarget {
+public:
+   ApparatusGenericTarget();
+   ~ApparatusGenericTarget();
 
-    void Build(G4String, G4double, G4double, G4double); 
-    void PlaceApparatus(G4LogicalVolume*, G4ThreeVector, G4RotationMatrix*); 
+   void Build(const G4String&, G4double, G4double, G4double);
+   void PlaceApparatus(G4LogicalVolume*, G4ThreeVector, G4RotationMatrix*);
 
-  private:
-    G4Box* BuildTarget();
-    void BuildTargetVolume();           
-    G4ThreeVector GetDirectionXYZ(G4double, G4double);
+private:
+   G4Box*        BuildTarget() const;
+   void          BuildTargetVolume();
+   G4ThreeVector GetDirectionXYZ(G4double, G4double);
 
-    // Logical volumes        
-    G4LogicalVolume* fTargetLog;    
+   // Logical volumes
+   G4LogicalVolume* fTargetLog{nullptr};
 
-    // Assembly volumes
-    G4AssemblyVolume* fAssembly;
+   // Assembly volumes
+   G4AssemblyVolume* fAssembly{nullptr};
 
-    G4String fTargetMaterial;
-    G4double fTargetLengthX;   
-    G4double fTargetLengthY;
-    G4double fTargetLengthZ;
+   G4String fTargetMaterial;
+   G4double fTargetLengthX{0.};
+   G4double fTargetLengthY{0.};
+   G4double fTargetLengthZ{0.};
 };
 
 #endif
-

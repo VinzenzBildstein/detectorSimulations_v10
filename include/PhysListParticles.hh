@@ -39,29 +39,19 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class PhysListParticles : public G4VPhysicsConstructor
-{
+class PhysListParticles : public G4VPhysicsConstructor {
 public:
-    PhysListParticles(const G4String& name = "particles");
-    virtual ~PhysListParticles();
+   explicit PhysListParticles(const G4String& name = "particles");
+   ~PhysListParticles() = default;
 
-public:
-    // This method will be invoked in the Construct() method.
-    // each particle type will be instantiated
-    virtual void ConstructParticle();
+   // This method will be invoked in the Construct() method.
+   // each particle type will be instantiated
+   void ConstructParticle() override;
 
-    // This method is dummy.
-    virtual void ConstructProcess() {};
-
+   // This method is dummy.
+   void ConstructProcess() override {}
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif
-
-
-
-
-
-
-

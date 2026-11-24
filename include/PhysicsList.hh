@@ -46,53 +46,51 @@ class G4StepLimiter;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class PhysicsList: public G4VModularPhysicsList
-{
+class PhysicsList : public G4VModularPhysicsList {
 public:
-    PhysicsList();
-    virtual ~PhysicsList();
+   PhysicsList();
+   virtual ~PhysicsList();
 
-    virtual void ConstructParticle();
+   void ConstructParticle() override;
 
-    virtual void SetCuts();
-    void SetCutForGamma(G4double);
-    void SetCutForElectron(G4double);
-    void SetCutForPositron(G4double);
+   void         SetCuts() override;
+   void         SetCutForGamma(G4double);
+   void         SetCutForElectron(G4double);
+   void         SetCutForPositron(G4double);
 
-    void SelectPhysicsList(const G4String& name);
-    virtual void ConstructProcess();
+   void         SelectPhysicsList(const G4String& name);
+   void         ConstructProcess() override;
 
-    void ConstructOp(G4bool);
-    void SpiceStepper(G4bool);
+   void ConstructOp(G4bool);
+   void SpiceStepper(G4bool);
 
-    void SetTargetCut(G4double val);
-    void SetDetectorCut(G4double val);
+   void SetTargetCut(G4double cut);
+   void SetDetectorCut(G4double cut);
 
 private:
+   void AddExtraBuilders(G4bool flagHP);
 
-    void AddExtraBuilders(G4bool flagHP);
+   // hide assignment operator
+   PhysicsList& operator=(const PhysicsList& right);
+   PhysicsList(const PhysicsList&);
 
-    // hide assignment operator
-    PhysicsList & operator=(const PhysicsList &right);
-    PhysicsList(const PhysicsList&);
+   G4double fCutForGamma;
+   G4double fCutForElectron;
+   G4double fCutForPositron;
 
-    G4double fCutForGamma;
-    G4double fCutForElectron;
-    G4double fCutForPositron;
+   G4VPhysicsConstructor* fEmPhysicsList;
+   G4VPhysicsConstructor* fRaddecayList;
+   G4VPhysicsConstructor* fParticleList;
+   G4VPhysicsConstructor* fHadPhysicsList;
 
-    G4VPhysicsConstructor*  fEmPhysicsList;
-    G4VPhysicsConstructor*  fRaddecayList;
-    G4VPhysicsConstructor*  fParticleList;
-    G4VPhysicsConstructor*  fHadPhysicsList;
+   std::vector<G4VPhysicsConstructor*> fHadronPhys;
+   G4int                               fNhadcomp;
 
-    std::vector<G4VPhysicsConstructor*>  fHadronPhys;
-    G4int fNhadcomp;
+   PhysicsListMessenger* fPMessenger;
+   G4ProductionCuts*     fDetectorCuts;
+   G4ProductionCuts*     fTargetCuts;
 
-    PhysicsListMessenger* fPMessenger;
-    G4ProductionCuts* fDetectorCuts;
-    G4ProductionCuts* fTargetCuts;
-
-    G4Scintillation* fScintProcess;
+   G4Scintillation* fScintProcess;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
