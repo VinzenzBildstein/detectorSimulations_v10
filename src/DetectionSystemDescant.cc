@@ -1593,7 +1593,7 @@ G4int DetectionSystemDescant::BuildDetectorVolume()
 
 	G4Material* material = G4Material::GetMaterial(fLiquidMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fLiquidMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fLiquidMaterial<<" not found, cannot build the detector volume! "<<G4endl;
 		return 0;
 	}
 

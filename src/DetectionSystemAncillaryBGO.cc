@@ -204,7 +204,7 @@ G4int DetectionSystemAncillaryBGO::PlaceDetector(G4LogicalVolume* expHallLog, G4
 G4int DetectionSystemAncillaryBGO::BuildBGOVolume() {
 	G4Material* material = G4Material::GetMaterial(fBgoMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fBgoMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fBgoMaterial<<" not found, cannot build the BGO volume! "<<G4endl;
 		return 0;
 	}
 
@@ -236,7 +236,7 @@ G4int DetectionSystemAncillaryBGO::BuildBGOVolume() {
 G4int DetectionSystemAncillaryBGO::BuildVacuumVolume() {
 	G4Material* material = G4Material::GetMaterial(fGapMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fGapMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fGapMaterial<<" not found, cannot build the vacuum volume! "<<G4endl;
 		return 0;
 	}
 
@@ -267,7 +267,7 @@ G4int DetectionSystemAncillaryBGO::BuildVacuumVolume() {
 G4int DetectionSystemAncillaryBGO::BuildAluminumCanVolume() {
 	G4Material* material = G4Material::GetMaterial(fCanMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fCanMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fCanMaterial<<" not found, cannot build the aluminium can! "<<G4endl;
 		return 0;
 	}
 
@@ -298,7 +298,7 @@ G4int DetectionSystemAncillaryBGO::BuildAluminumCanVolume() {
 G4int DetectionSystemAncillaryBGO::BuildAluminumCanBackCoverVolume() {
 	G4Material* material = G4Material::GetMaterial(fCanMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fCanMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fCanMaterial<<" not found, cannot build the back cover! "<<G4endl;
 		return 0;
 	}
 
@@ -329,7 +329,7 @@ G4int DetectionSystemAncillaryBGO::BuildAluminumCanBackCoverVolume() {
 G4int DetectionSystemAncillaryBGO::BuildHevimetPiece() {
 	G4Material* material = G4Material::GetMaterial(fHevimetMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fHevimetMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fHevimetMaterial<<" not found, cannot build the hevimet piece! "<<G4endl;
 		return 0;
 	}
 

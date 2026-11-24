@@ -324,7 +324,7 @@ G4int ApparatusGriffinStructure::Place(G4LogicalVolume* expHallLog, G4int select
 G4int ApparatusGriffinStructure::BuildSquarePiece() {
 	G4Material* material = G4Material::GetMaterial(fStructureMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fStructureMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fStructureMaterial<<" not found, cannot build the square piece! "<<G4endl;
 		return 0;
 	}
 
@@ -355,7 +355,7 @@ G4int ApparatusGriffinStructure::BuildSquarePiece() {
 G4int ApparatusGriffinStructure::BuildTrianglePiece() {
 	G4Material* material = G4Material::GetMaterial(fStructureMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fStructureMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fStructureMaterial<<" not found, cannot build the triangle piece! "<<G4endl;
 		return 0;
 	}
 
@@ -393,7 +393,7 @@ G4int ApparatusGriffinStructure::BuildLargeRingFrame()
 {
 	G4Material* material = G4Material::GetMaterial(fStructureMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fStructureMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fStructureMaterial<<" not found, cannot build the large ring frame! "<<G4endl;
 		return 0;
 	}
 
@@ -424,7 +424,7 @@ G4int ApparatusGriffinStructure::BuildLargeRingFrame()
 G4int ApparatusGriffinStructure::BuildRodPiece() {
 	G4Material* material = G4Material::GetMaterial(fRodMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fRodMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fRodMaterial<<" not found, cannot build the rod piece! "<<G4endl;
 		return 0;
 	}
 

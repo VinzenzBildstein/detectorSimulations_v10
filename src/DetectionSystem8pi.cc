@@ -153,7 +153,7 @@ G4int DetectionSystem8pi::AddGermanium() {
     //material
     G4Material* material = G4Material::GetMaterial("Germanium");
     if(!material) {
-        G4cout<<" ----> Material "<<"Germanium"<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<"Germanium"<<" not found, cannot build the 8pi germanium! "<<G4endl;
         return 0;
     }
 
@@ -211,7 +211,7 @@ G4int DetectionSystem8pi::AddGermaniumDeadLayer() {
     //material
     G4Material* material = G4Material::GetMaterial("Germanium");
     if(!material) {
-        G4cout<<" ----> Material "<<"Germanium"<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<"Germanium"<<" not found, cannot build the germanium dead layer! "<<G4endl;
         return 0;
     }
 
@@ -270,7 +270,7 @@ G4int DetectionSystem8pi::AddGermaniumCore() {
     //material
     G4Material* material = G4Material::GetMaterial("Vacuum");
     if(!material) {
-        G4cout<<" ----> Material "<<"Vacuum"<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<"Vacuum"<<" not found, cannot build the germanium core! "<<G4endl;
         return 0;
     }
 
@@ -330,7 +330,7 @@ G4int DetectionSystem8pi::AddElectrodeMatElectrode() {
     //material
     G4Material* material = G4Material::GetMaterial(fElectrodeMat);
     if(!material) {
-        G4cout<<" ----> Material "<<fElectrodeMat<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<fElectrodeMat<<" not found, cannot build the electrode! "<<G4endl;
         return 0;
     }
 
@@ -393,7 +393,7 @@ G4int DetectionSystem8pi::AddStructureMatCage() {
     //material
     G4Material* material = G4Material::GetMaterial(fStructureMat);
     if(!material) {
-        G4cout<<" ----> Material "<<fStructureMat<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<fStructureMat<<" not found, cannot build the structure cage! "<<G4endl;
         return 0;
     }
 
@@ -459,7 +459,7 @@ G4int DetectionSystem8pi::AddInnerStructureMatLids() {
     //material
     G4Material* material = G4Material::GetMaterial(fStructureMat);
     if(!material) {
-        G4cout<<" ----> Material "<<"StructureMat"<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<"StructureMat"<<" not found, cannot build the structure lids! "<<G4endl;
         return 0;
     }
 
@@ -501,7 +501,7 @@ G4int DetectionSystem8pi::AddStructureMatCoolingRod() {
     //material
     G4Material* material = G4Material::GetMaterial(fStructureMat);
     if(!material) {
-        G4cout<<" ----> Material "<<fStructureMat<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<fStructureMat<<" not found, cannot build the cooling rod! "<<G4endl;
         return 0;
     }
 
@@ -538,7 +538,7 @@ G4int DetectionSystem8pi::AddElectrodeMatCoolingRod()
     //material
     G4Material* material = G4Material::GetMaterial(fElectrodeMat);
     if(!material) {
-        G4cout<<" ----> Material "<<fElectrodeMat<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<fElectrodeMat<<" not found, cannot build the cooling rod! "<<G4endl;
         return 0;
     }
 
@@ -576,7 +576,7 @@ G4int DetectionSystem8pi::AddBerylliumWindow() {
     //material
     G4Material* material = G4Material::GetMaterial("Beryllium");
     if(!material) {
-        G4cout<<" ----> Material "<<"Beryllium"<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<"Beryllium"<<" not found, cannot build the beryllium window! "<<G4endl;
         return 0;
     }
 
@@ -611,7 +611,7 @@ G4int DetectionSystem8pi::AddOuterStructureMatCan() {
     //material
     G4Material* material = G4Material::GetMaterial(fStructureMat);
     if(!material) {
-        G4cout<<" ----> Material "<<fStructureMat<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<fStructureMat<<" not found, cannot build the outer structure! "<<G4endl;
         return 0;
     }
 
@@ -666,7 +666,7 @@ G4int DetectionSystem8pi::AddCoolingRodCover()
     //material
     G4Material* material = G4Material::GetMaterial(fStructureMat);
     if(!material) {
-        G4cout<<" ----> Material "<<"StructureMat"<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<"StructureMat"<<" not found, cannot build the cooling rod cover! "<<G4endl;
         return 0;
     }
 
@@ -726,7 +726,7 @@ G4int DetectionSystem8pi::AddInnerBGOAnnulus() {
     //material
     G4Material* material = G4Material::GetMaterial("BGO");
     if(!material) {
-        G4cout<<" ----> Material "<<"BGO"<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<"BGO"<<" not found, cannot build the inner BGO annulus! "<<G4endl;
         return 0;
     }
 
@@ -762,7 +762,7 @@ G4int DetectionSystem8pi::AddStructureMatBGOSheath() {
     //material
     G4Material* material = G4Material::GetMaterial(fStructureMat);
     if(!material) {
-        G4cout<<" ----> Material "<<fStructureMat<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<fStructureMat<<" not found, cannot build the BGO sheath! "<<G4endl;
         return 0;
     }
 
@@ -798,7 +798,7 @@ G4int DetectionSystem8pi::AddOuterBGOAnnulus() {
     //material
     G4Material* material = G4Material::GetMaterial("BGO");
     if(!material) {
-        G4cout<<" ----> Material "<<"BGO"<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<"BGO"<<" not found, cannot build the BGO annulus! "<<G4endl;
         return 0;
     }
 
@@ -851,7 +851,7 @@ G4int DetectionSystem8pi::AddLiquidN2Container() {
     //material
     G4Material* material = G4Material::GetMaterial("LiquidN2");
     if(!material) {
-        G4cout<<" ----> Material "<<"LiquidN2"<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<"LiquidN2"<<" not found, cannot build the LN2 container! "<<G4endl;
         return 0;
     }
 
@@ -884,7 +884,7 @@ G4int DetectionSystem8pi::AddLiquidN2Container() {
     //material
     material = G4Material::GetMaterial(fStructureMat);
     if(!material) {
-        G4cout<<" ----> Material "<<fStructureMat<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<fStructureMat<<" not found, cannot build the 8pi structure! "<<G4endl;
         return 0;
     }
 
@@ -960,7 +960,7 @@ G4int DetectionSystem8pi::AddHevimetalCollimator() {
     //material
     G4Material* material = G4Material::GetMaterial("Hevimetal");
     if(!material) {
-        G4cout<<" ----> Material "<<"Hevimetal"<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<"Hevimetal"<<" not found, cannot build the hevimet collimator! "<<G4endl;
         return 0;
     }
 
@@ -1020,7 +1020,7 @@ G4int DetectionSystem8pi::AddAuxMatPlug() {
     //material
     G4Material* material = G4Material::GetMaterial(fAuxMat);
     if(!material) {
-        G4cout<<" ----> Material "<<fAuxMat<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<fAuxMat<<" not found, cannot build the aux plug! "<<G4endl;
         return 0;
     }
 
@@ -1061,7 +1061,7 @@ G4int DetectionSystem8pi::AddThinAuxMatLayer() {
     //material
     G4Material* material = G4Material::GetMaterial(fAuxMat);
     if(!material) {
-        G4cout<<" ----> Material "<<fAuxMat<<" not found, cannot build the detector shell! "<<G4endl;
+        G4cout<<" ----> Material "<<fAuxMat<<" not found, cannot build the thin aux layer! "<<G4endl;
         return 0;
     }
 

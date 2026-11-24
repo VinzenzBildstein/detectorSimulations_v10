@@ -116,7 +116,7 @@ G4int DetectionSystemGrid::PlaceDetector(G4LogicalVolume* expHallLog) {
 G4int DetectionSystemGrid::BuildCellVolume() {
 	G4Material* material = G4Material::GetMaterial(fCellMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fCellMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fCellMaterial<<" not found, cannot build the cell volume! "<<G4endl;
 		return 0;
 	}
 

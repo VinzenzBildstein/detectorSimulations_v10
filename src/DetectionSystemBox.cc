@@ -80,7 +80,7 @@ G4int DetectionSystemBox::BuildXNormalVolumes()
 {
 	G4Material* material = G4Material::GetMaterial(fCellMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fCellMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fCellMaterial<<" not found, cannot build the x-normal! "<<G4endl;
 		return 0;
 	}
 
@@ -122,7 +122,7 @@ G4int DetectionSystemBox::BuildYNormalVolumes()
 {
 	G4Material* material = G4Material::GetMaterial(fCellMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fCellMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fCellMaterial<<" not found, cannot build the y-normal! "<<G4endl;
 		return 0;
 	}
 
@@ -164,7 +164,7 @@ G4int DetectionSystemBox::BuildZNormalVolumes()
 {
 	G4Material* material = G4Material::GetMaterial(fCellMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fCellMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fCellMaterial<<" not found, cannot build the z-normal! "<<G4endl;
 		return 0;
 	}
 

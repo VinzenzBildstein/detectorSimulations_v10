@@ -112,7 +112,7 @@ G4int DetectionSystemS3::BuildSiliconWafer(G4int RingID) {
 	G4Material* material = G4Material::GetMaterial(fWaferMaterial);
 	if(!material) {
 		G4cout<<" ----> Material "<<fWaferMaterial
-			<<" not found, cannot build the detector shell! "<<G4endl;
+			<<" not found, cannot build the silicon wafer! "<<G4endl;
 		return 0;
 	}
 

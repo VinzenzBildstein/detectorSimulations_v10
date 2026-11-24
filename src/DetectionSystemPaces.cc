@@ -279,7 +279,7 @@ G4int DetectionSystemPaces::AddSiliconBlock() {
 	//material
 	G4Material* material = G4Material::GetMaterial("Silicon");
 	if(!material) {
-		G4cout<<" ----> Material "<<"Silicon"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Silicon"<<" not found, cannot build the silicon block! "<<G4endl;
 		return 0;
 	}
 
@@ -310,7 +310,7 @@ G4int DetectionSystemPaces::AddSiliconDeadLayer() {
 	//material
 	G4Material* material = G4Material::GetMaterial("Silicon"); // "Nominal Structure Stopping Power of Window-Ortec, 2u Si"
 	if(!material) {
-		G4cout<<" ----> Material "<<"Silicon"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Silicon"<<" not found, cannot build the silicon dead layer! "<<G4endl;
 		return 0;
 	}
 
@@ -340,7 +340,7 @@ G4int DetectionSystemPaces::AddCanister() {
 	//material
 	G4Material* material = G4Material::GetMaterial("Silicon");  // would be Silicon, Zhimin
 	if(!material) {
-		G4cout<<" ----> Material "<<"Silicon"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Silicon"<<" not found, cannot build the canister! "<<G4endl;
 		return 0;
 	}
 
@@ -370,7 +370,7 @@ G4int DetectionSystemPaces::AddAluminumAnnulusTop() {
 	//material
 	G4Material* material = G4Material::GetMaterial("Aluminum");
 	if(!material) {
-		G4cout<<" ----> Material "<<"Aluminum"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Aluminum"<<" not found, cannot build the annulus top! "<<G4endl;
 		return 0;
 	}
 
@@ -428,7 +428,7 @@ G4int DetectionSystemPaces::AddAluminumAnnulusBot() {
 	//material
 	G4Material* material = G4Material::GetMaterial("Aluminum");
 	if(!material) {
-		G4cout<<" ----> Material "<<"Aluminum"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Aluminum"<<" not found, cannot build the annulus bottom! "<<G4endl;
 		return 0;
 	}
 
@@ -486,7 +486,7 @@ G4int DetectionSystemPaces::AddTeflonAnnulusTop() {
 	//material
 	G4Material* material = G4Material::GetMaterial("Teflon");
 	if(!material) {
-		G4cout<<" ----> Material "<<"Teflon"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Teflon"<<" not found, cannot build the teflon annulus top! "<<G4endl;
 		return 0;
 	}
 
@@ -544,7 +544,7 @@ G4int DetectionSystemPaces::AddTeflonAnnulusBot() {
 	//material
 	G4Material* material = G4Material::GetMaterial("Teflon");
 	if(!material) {
-		G4cout<<" ----> Material "<<"Teflon"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Teflon"<<" not found, cannot build the teflon annulus bottom! "<<G4endl;
 		return 0;
 	}
 
@@ -602,7 +602,7 @@ G4int DetectionSystemPaces::AddAluminumHemisphere() {
 	//material
 	G4Material* material = G4Material::GetMaterial("Aluminum");
 	if(!material) {
-		G4cout<<" ----> Material "<<"Aluminum"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Aluminum"<<" not found, cannot build the aluminium hemisphere! "<<G4endl;
 		return 0;
 	}
 

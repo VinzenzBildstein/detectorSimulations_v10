@@ -406,12 +406,12 @@ G4int DetectionSystemSceptar::PlaceDetector(G4LogicalVolume* expHallLog, G4int d
 G4int DetectionSystemSceptar::ConstructScintillator() {
 	G4Material* materialMylar = G4Material::GetMaterial("Mylar");
 	if(!materialMylar) {
-		G4cout<<" ----> Material "<<"Mylar"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Mylar"<<" not found, cannot build the scintillator! "<<G4endl;
 		return 0;
 	}
 	G4Material* materialBc404 = G4Material::GetMaterial("BC404");
 	if(!materialBc404) {
-		G4cout<<" ----> Material "<<"BC404"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"BC404"<<" not found, cannot build the scintillator! "<<G4endl;
 		return 0;
 	}
 
@@ -482,7 +482,7 @@ G4int DetectionSystemSceptar::ConstructScintillator() {
 G4int DetectionSystemSceptar::ConstructDelrinShell() {
 	G4Material* materialDelrin = G4Material::GetMaterial("Delrin");
 	if(!materialDelrin) {
-		G4cout<<" ----> Material "<<"Delrin"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Delrin"<<" not found, cannot build the delrin shell! "<<G4endl;
 		return 0;
 	}
 
@@ -512,7 +512,7 @@ G4int DetectionSystemSceptar::ConstructDelrinShell() {
 G4int DetectionSystemSceptar::Construct2ndDelrinShell() {
 	G4Material* materialDelrin = G4Material::GetMaterial("Delrin");
 	if(!materialDelrin) {
-		G4cout<<" ----> Material "<<"Delrin"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Delrin"<<" not found, cannot build the 2nd delrin shell! "<<G4endl;
 		return 0;
 	}
 
@@ -543,7 +543,7 @@ G4int DetectionSystemSceptar::Construct2ndDelrinShell() {
 G4int DetectionSystemSceptar::ConstructHevimetShell() {
 	G4Material* materialHevimet = G4Material::GetMaterial("Hevimet");
 	if(!materialHevimet) {
-		G4cout<<" ----> Material "<<"Hevimet"<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<"Hevimet"<<" not found, cannot build the hevimet shell! "<<G4endl;
 		return 0;
 	}
 

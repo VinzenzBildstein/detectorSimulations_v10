@@ -266,7 +266,7 @@ G4int DetectionSystemLanthanumBromide::PlaceDetector(G4LogicalVolume* expHallLog
 G4int DetectionSystemLanthanumBromide::BuildCrystalVolume() {
 	G4Material* material = G4Material::GetMaterial(fCrystalMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fCrystalMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fCrystalMaterial<<" not found, cannot build the crystal volume! "<<G4endl;
 		return 0;
 	}
 
@@ -296,7 +296,7 @@ G4int DetectionSystemLanthanumBromide::BuildCrystalVolume() {
 G4int DetectionSystemLanthanumBromide::BuildAluminumCanVolume() {
 	G4Material* material = G4Material::GetMaterial(fCanMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fCanMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fCanMaterial<<" not found, cannot build the aluminium can! "<<G4endl;
 		return 0;
 	}
 
@@ -370,7 +370,7 @@ G4int DetectionSystemLanthanumBromide::BuildAluminumCanVolume() {
 G4int DetectionSystemLanthanumBromide::BuildPackingVolume() {
 	G4Material* material = G4Material::GetMaterial(fPackingMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fPackingMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fPackingMaterial<<" not found, cannot build the packing volume! "<<G4endl;
 		return 0;
 	}
 
@@ -425,7 +425,7 @@ G4int DetectionSystemLanthanumBromide::BuildPackingVolume() {
 G4int DetectionSystemLanthanumBromide::BuildDiscVolume() {
 	G4Material* material = G4Material::GetMaterial(fDiscMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fDiscMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fDiscMaterial<<" not found, cannot build the disc volume! "<<G4endl;
 		return 0;
 	}
 
@@ -462,7 +462,7 @@ G4int DetectionSystemLanthanumBromide::BuildDiscVolume() {
 G4int DetectionSystemLanthanumBromide::BuildSealVolume() {
 	G4Material* material = G4Material::GetMaterial(fSealMaterial);
 	if(!material) {
-		G4cout<<" ----> Material "<<fSealMaterial<<" not found, cannot build the detector shell! "<<G4endl;
+		G4cout<<" ----> Material "<<fSealMaterial<<" not found, cannot build the seal volume! "<<G4endl;
 		return 0;
 	}
 
