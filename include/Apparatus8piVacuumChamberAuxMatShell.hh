@@ -27,7 +27,7 @@
 // $Id: DetectorConstruction.hh,v 1.1 2010-10-18 15:56:17 maire Exp $
 // GEANT4 tag $Name: geant4-09-04-patch-02 $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -43,41 +43,39 @@ class DetectorMessenger;
 ///////////////////////////////////////////////////////////////////////
 // Apparatus8piVacuumChamberAuxMatShell
 ///////////////////////////////////////////////////////////////////////
-class Apparatus8piVacuumChamberAuxMatShell
-{
+class Apparatus8piVacuumChamberAuxMatShell {
 public:
-    Apparatus8piVacuumChamberAuxMatShell();
-    ~Apparatus8piVacuumChamberAuxMatShell();
+   Apparatus8piVacuumChamberAuxMatShell();
+   ~Apparatus8piVacuumChamberAuxMatShell();
 
-    void Build(G4LogicalVolume*, G4double);
+   void Build(G4LogicalVolume*, G4double);
 
 private:
-    G4LogicalVolume* fExpHallLog;
+   G4LogicalVolume* fExpHallLog;
 
-    // LogicalVolumes used in Apparatus8piVacuumChamberAuxMatShell()
+   // LogicalVolumes used in Apparatus8piVacuumChamberAuxMatShell()
 
-    G4LogicalVolume* fVacuumChamberAuxSphereLog;
+   G4LogicalVolume* fVacuumChamberAuxSphereLog;
 
-    // Physical Volumes used in Apparatus8piVacuumChamberAuxMatShell()
+   // Physical Volumes used in Apparatus8piVacuumChamberAuxMatShell()
 
-    G4VPhysicalVolume* fVacuumChamberSpherePhys;
+   G4VPhysicalVolume* fVacuumChamberSpherePhys;
 
-    ///////////////////////////////////////////////////////////////////
-    // Apparatus8piVacuumChamberAuxMatShellCylinder Properties
-    ///////////////////////////////////////////////////////////////////
+   ///////////////////////////////////////////////////////////////////
+   // Apparatus8piVacuumChamberAuxMatShellCylinder Properties
+   ///////////////////////////////////////////////////////////////////
 
-    // Materials
-    G4String fVacuumChamberSphereMaterial;
+   // Materials
+   G4String fVacuumChamberSphereMaterial;
 
-    // Dimensions
-    G4double fVacuumChamberOuterRadius;
+   // Dimensions
+   G4double fVacuumChamberOuterRadius;
 
-    // internal methods for ConstructApparatus8piVacuumChamberAuxMatShell() for Building
-    void BuildApparatus8piVacuumChamberAuxMatShellSphere(G4double thickness);
+   // internal methods for ConstructApparatus8piVacuumChamberAuxMatShell() for Building
+   void BuildApparatus8piVacuumChamberAuxMatShellSphere(G4double thickness);
 
-    // internal methods for ConstructApparatus8piVacuumChamberAuxMatShell() for Placing
-    void PlaceApparatus8piVacuumChamberAuxMatShellSphere();
-    
+   // internal methods for ConstructApparatus8piVacuumChamberAuxMatShell() for Placing
+   void PlaceApparatus8piVacuumChamberAuxMatShellSphere();
 };
 
 #endif

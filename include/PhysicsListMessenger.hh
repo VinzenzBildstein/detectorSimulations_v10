@@ -45,30 +45,26 @@ class G4UIcmdWithABool;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class PhysicsListMessenger: public G4UImessenger
-{
+class PhysicsListMessenger : public G4UImessenger {
 public:
+   PhysicsListMessenger(PhysicsList*);
+   virtual ~PhysicsListMessenger();
 
-    PhysicsListMessenger(PhysicsList* );
-    virtual ~PhysicsListMessenger();
-
-    virtual void SetNewValue(G4UIcommand*, G4String);
+   virtual void SetNewValue(G4UIcommand*, G4String);
 
 private:
+   PhysicsList* fPPhysicsList;
 
-    PhysicsList* fPPhysicsList;
-
-    G4UIdirectory*             fPhysDir;
-    G4UIcmdWithADoubleAndUnit* fGammaCutCmd;
-    G4UIcmdWithADoubleAndUnit* fElectCutCmd;
-    G4UIcmdWithADoubleAndUnit* fProtoCutCmd;
-    G4UIcmdWithADoubleAndUnit* fAllCutCmd;
-    G4UIcmdWithADoubleAndUnit* fMCutCmd;
-    G4UIcmdWithADoubleAndUnit* fECutCmd;
-    G4UIcmdWithAString*        fPListCmd;
-    G4UIcmdWithABool*          fConstructOpCmd;
-    G4UIcmdWithABool*          fSpiceStepperCmd;
-
+   G4UIdirectory*             fPhysDir;
+   G4UIcmdWithADoubleAndUnit* fGammaCutCmd;
+   G4UIcmdWithADoubleAndUnit* fElectCutCmd;
+   G4UIcmdWithADoubleAndUnit* fProtoCutCmd;
+   G4UIcmdWithADoubleAndUnit* fAllCutCmd;
+   G4UIcmdWithADoubleAndUnit* fMCutCmd;
+   G4UIcmdWithADoubleAndUnit* fECutCmd;
+   G4UIcmdWithAString*        fPListCmd;
+   G4UIcmdWithABool*          fConstructOpCmd;
+   G4UIcmdWithABool*          fSpiceStepperCmd;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

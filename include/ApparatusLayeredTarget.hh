@@ -27,7 +27,7 @@
 // $Id: DetectorConstruction.hh,v 1.1 2010-10-18 15:56:17 maire Exp $
 // GEANT4 tag $Name: geant4-09-04-patch-02 $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -41,33 +41,28 @@
 //forward declare for placement
 class G4VPhysicalVolume;
 class G4UserLimits;
-class ApparatusLayeredTarget
-{
-  public:
-	  
-    ApparatusLayeredTarget(G4double);
-    ~ApparatusLayeredTarget();
+class ApparatusLayeredTarget {
+public:
+   ApparatusLayeredTarget(G4double);
+   ~ApparatusLayeredTarget();
 
-  private:
-   std::vector< G4LogicalVolume* > fTargetLayerLog;
-   std::vector< G4VPhysicalVolume* > fTargetLayerPhys;
-   std::vector< G4double > fTargetLayerThick;
-    
-  private://variables for build, set in the class as read in
-    
-    G4double fTargetRadius;
-    
-    //Independent stepping
-    G4UserLimits* fStepLimit;
-    
-  public: 
-    G4int BuildTargetLayer(G4String LayerMaterial, G4double LayerArealDensity);
-    void  PlaceTarget(G4LogicalVolume*);
-    G4double LayerStart(int);
-    
-    G4double fBeamPos;//uses beam position to place targets
-             
+private:
+   std::vector<G4LogicalVolume*>   fTargetLayerLog;
+   std::vector<G4VPhysicalVolume*> fTargetLayerPhys;
+   std::vector<G4double>           fTargetLayerThick;
 
+private:   //variables for build, set in the class as read in
+   G4double fTargetRadius;
+
+   //Independent stepping
+   G4UserLimits* fStepLimit;
+
+public:
+   G4int    BuildTargetLayer(G4String LayerMaterial, G4double LayerArealDensity);
+   void     PlaceTarget(G4LogicalVolume*);
+   G4double LayerStart(int);
+
+   G4double fBeamPos;   //uses beam position to place targets
 };
 
 #endif

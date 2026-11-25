@@ -9,24 +9,22 @@
 #include <cmath>
 #include <string>
 
-class BeamDistribution
-{
-  public:
-      BeamDistribution();
-      BeamDistribution(G4String);
-      ~BeamDistribution();
+class BeamDistribution {
+public:
+   BeamDistribution();
+   BeamDistribution(G4String);
+   ~BeamDistribution();
 
-  public:
-     void LoadDistribution(G4String filename);
-     G4double GetRandom();
+public:
+   void     LoadDistribution(G4String filename);
+   G4double GetRandom();
 
-  private:
-      bool fLoadGood;
-      std::vector<G4double> fDistVec, fRelProbVec; //these vectors will hld all of the data that is read in
-      G4double  fDistStep;
+private:
+   bool                  fLoadGood;
+   std::vector<G4double> fDistVec, fRelProbVec;   //these vectors will hld all of the data that is read in
+   G4double              fDistStep;
 
-  public:
-	  bool Good(){return fLoadGood;}
-	  
-}; 
+public:
+   bool Good() { return fLoadGood; }
+};
 #endif

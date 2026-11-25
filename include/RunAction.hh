@@ -29,7 +29,7 @@
 //
 // $Id: RunAction.hh 68015 2013-03-13 13:27:27Z gcosmo $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -45,20 +45,18 @@
 
 class G4Run;
 
-class RunAction : public G4UserRunAction
-{
+class RunAction : public G4UserRunAction {
 public:
-	RunAction(HistoManager*);
-	virtual ~RunAction();
+   RunAction(HistoManager*);
+   virtual ~RunAction();
 
-	virtual void BeginOfRunAction(const G4Run*);
-	virtual void   EndOfRunAction(const G4Run*);
+   virtual void BeginOfRunAction(const G4Run*);
+   virtual void EndOfRunAction(const G4Run*);
 
 private:
-	HistoManager* fHistoManager;
+   HistoManager* fHistoManager;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif
-

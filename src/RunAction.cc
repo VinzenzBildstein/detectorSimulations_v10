@@ -41,9 +41,9 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 RunAction::RunAction(HistoManager* histoManager)
-: G4UserRunAction()
+   : G4UserRunAction()
 {
-	fHistoManager = histoManager;
+   fHistoManager = histoManager;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -55,27 +55,27 @@ RunAction::~RunAction()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void RunAction::BeginOfRunAction(const G4Run* aRun)
-{ 
-	if(G4Threading::G4GetThreadId() <= 0) {
-		G4cout<<"### Run "<<aRun->GetRunID()<<" start."<<G4endl;
-	}
-	if(fHistoManager != nullptr) {
-		fHistoManager->Book();
-		fHistoManager->GetDetectorConstruction()->SetProperties();
-	}
+{
+   if(G4Threading::G4GetThreadId() <= 0) {
+      G4cout << "### Run " << aRun->GetRunID() << " start." << G4endl;
+   }
+   if(fHistoManager != nullptr) {
+      fHistoManager->Book();
+      fHistoManager->GetDetectorConstruction()->SetProperties();
+   }
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void RunAction::EndOfRunAction(const G4Run* aRun)
 {
-	G4int NbOfEvents = aRun->GetNumberOfEvent();
-	if(NbOfEvents == 0) return;
+   G4int NbOfEvents = aRun->GetNumberOfEvent();
+   if(NbOfEvents == 0) return;
 
-	if(fHistoManager != nullptr) {
-		//fHistoManager->PrintStatistic();
-		fHistoManager->Save();
-	}
+   if(fHistoManager != nullptr) {
+      //fHistoManager->PrintStatistic();
+      fHistoManager->Save();
+   }
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

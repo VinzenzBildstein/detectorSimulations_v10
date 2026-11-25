@@ -35,7 +35,7 @@
 #ifndef APPARATUSDESCANTSTRUCTURE_HH
 #define APPARATUSDESCANTSTRUCTURE_HH
 
-#include "G4SystemOfUnits.hh" // new version geant4.10 requires units
+#include "G4SystemOfUnits.hh"   // new version geant4.10 requires units
 //#include "G4IntersectionSolid.hh"
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
@@ -43,80 +43,78 @@
 //#include "G4Sphere.hh"
 
 class G4AssemblyVolume;
-class ApparatusDescantStructure
-{
+class ApparatusDescantStructure {
 public:
-    ApparatusDescantStructure();
-    ~ApparatusDescantStructure();
+   ApparatusDescantStructure();
+   ~ApparatusDescantStructure();
 
-    G4int Build();
+   G4int Build();
 
-    G4int PlaceDescantStructure(G4LogicalVolume* expHallLog);
+   G4int PlaceDescantStructure(G4LogicalVolume* expHallLog);
 
 private:
-    // Logical volumes
-    G4LogicalVolume* fDescantStructureLog;
+   // Logical volumes
+   G4LogicalVolume* fDescantStructureLog;
 
-    // Assembly volumes
-    G4AssemblyVolume* fAssemblyDescantStructure;
+   // Assembly volumes
+   G4AssemblyVolume* fAssemblyDescantStructure;
 
-    G4String fStructureMaterial;
-    G4double fStructureInnerRadius;
-    G4double fStructureOuterRadius;
-    G4double fStartPhi;
-    G4double fDeltaPhi;
-    G4double fStartTheta;
-    G4double fDeltaTheta;
-    G4double fStructureRadialDistance;
+   G4String fStructureMaterial;
+   G4double fStructureInnerRadius;
+   G4double fStructureOuterRadius;
+   G4double fStartPhi;
+   G4double fDeltaPhi;
+   G4double fStartTheta;
+   G4double fDeltaTheta;
+   G4double fStructureRadialDistance;
 
-    //for subtraction polyhedra
-    G4int fNumSides;
-    G4int fNumZplanes;
-    G4double fZPlanes[2];
+   //for subtraction polyhedra
+   G4int    fNumSides;
+   G4int    fNumZplanes;
+   G4double fZPlanes[2];
 
-    G4double fPolyRadiusRed;
-    G4double fInnerRadiusRed[2];
-    G4double fOuterRadiusRed[2];
+   G4double fPolyRadiusRed;
+   G4double fInnerRadiusRed[2];
+   G4double fOuterRadiusRed[2];
 
-    G4double fPolyRadiusGreenYellow;
-    G4double fInnerRadiusGreenYellow[2];
-    G4double fOuterRadiusGreenYellow[2];
+   G4double fPolyRadiusGreenYellow;
+   G4double fInnerRadiusGreenYellow[2];
+   G4double fOuterRadiusGreenYellow[2];
 
-    G4double fPolyRadiusWhite;
-    G4double fInnerRadiusWhite[2];
-    G4double fOuterRadiusWhite[2];
+   G4double fPolyRadiusWhite;
+   G4double fInnerRadiusWhite[2];
+   G4double fOuterRadiusWhite[2];
 
-    //for the subtraction box
-    G4double fSubBoxX, fSubBoxY, fSubBoxZ;
-    G4double fMoveCut;
+   //for the subtraction box
+   G4double fSubBoxX, fSubBoxY, fSubBoxZ;
+   G4double fMoveCut;
 
-    //for back polyhedra
-    G4double fBackRadius;
-    G4double fInnerRadiusBack[2];
-    G4double fOuterRadiusBack[2];
-    G4double fZPlanesBack[2];
+   //for back polyhedra
+   G4double fBackRadius;
+   G4double fInnerRadiusBack[2];
+   G4double fOuterRadiusBack[2];
+   G4double fZPlanesBack[2];
 
-    // for subtraction cylinder
-    G4double fMinRadius;
-    G4double fMaxRadius;
-    G4double fHalfLength;
-    G4double fSubtractionStartPhi;
-    G4double fSubtractionDeltaPhi;
+   // for subtraction cylinder
+   G4double fMinRadius;
+   G4double fMaxRadius;
+   G4double fHalfLength;
+   G4double fSubtractionStartPhi;
+   G4double fSubtractionDeltaPhi;
 
-    // The Euler angles from James' MSc thesis which gives us the detector positions
-    // Some of the angles for the green and yellow detectors are wrong in James' thesis,
-    // note the +180 on a few angles.
-    G4double fBlueAlphaBetaGamma[15][3];
-    G4double fGreenAlphaBetaGamma[10][3];
-    G4double fRedAlphaBetaGamma[15][3];
-    G4double fWhiteAlphaBetaGamma[20][3];
-    G4double fYellowAlphaBetaGamma[10][3];
+   // The Euler angles from James' MSc thesis which gives us the detector positions
+   // Some of the angles for the green and yellow detectors are wrong in James' thesis,
+   // note the +180 on a few angles.
+   G4double fBlueAlphaBetaGamma[15][3];
+   G4double fGreenAlphaBetaGamma[10][3];
+   G4double fRedAlphaBetaGamma[15][3];
+   G4double fWhiteAlphaBetaGamma[20][3];
+   G4double fYellowAlphaBetaGamma[10][3];
 
-    // Descant Structure Colour
-    G4Colour fGreyColour;
+   // Descant Structure Colour
+   G4Colour fGreyColour;
 
-    G4int BuildDescantShell();
+   G4int BuildDescantShell();
 };
 
 #endif
-

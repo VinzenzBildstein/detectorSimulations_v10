@@ -56,94 +56,125 @@ class G4Event;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
-{
-private:    
-    G4ParticleGun*                fParticleGun;  //pointer a to G4 class
-    DetectorConstruction*         fDetector;     //pointer to the geometry
-    HistoManager*                 fHistoManager; //pointer to the histo manager
-    PrimaryGeneratorMessenger*    fGunMessenger; //messenger of this class
-    BeamDistribution*		       fBeamDistribution;//pointer to the BeamDistribution class
+class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction {
+private:
+   G4ParticleGun*             fParticleGun;        //pointer a to G4 class
+   DetectorConstruction*      fDetector;           //pointer to the geometry
+   HistoManager*              fHistoManager;       //pointer to the histo manager
+   PrimaryGeneratorMessenger* fGunMessenger;       //messenger of this class
+   BeamDistribution*          fBeamDistribution;   //pointer to the BeamDistribution class
 
 public:
-    PrimaryGeneratorAction(HistoManager*);
-    virtual ~PrimaryGeneratorAction();
-    void GeneratePrimaries(G4Event*);
-	 void GenerateKentuckyPrimaries(G4Event*);
-	 void GenerateAngularCorrelation(G4Event*); 
+   PrimaryGeneratorAction(HistoManager*);
+   virtual ~PrimaryGeneratorAction();
+   void GeneratePrimaries(G4Event*);
+   void GenerateKentuckyPrimaries(G4Event*);
+   void GenerateAngularCorrelation(G4Event*);
 
-    void SetNumberOfDecayingLaBrDetectors(G4int num) { fNumberOfDecayingLaBrDetectors = num; }
-    void SetEfficiencyEnergy(G4double num) { fEffEnergy = num; fHistoManager->BeamEnergy(num); }
-    void SetEfficiencyDirection(G4ThreeVector num) { fEffDirection = num; fEffDirectionBool = true; }
-    
-    void PassEfficiencyPosition(G4ThreeVector num);
-    void SetEfficiencyPosition(G4ThreeVector num) { fEffPosition = num; fEffPositionBool = true; PassEfficiencyPosition(fEffPosition); }
-    
-    void SetEfficiencyParticle(G4String val) { fEffParticle = val; fEffParticleBool = true; }
-    void SetEfficiencyPolarization(G4ThreeVector num ) { fEffPolarizationVector = num; fEffPolarization = true; }
-    void SetConeMaxAngle(G4double num1) { fAngleInit = num1; fConeAngleBool = true; fEffDirectionBool = true; }
-    void SetConeMinAngle(G4double num1) { fAngleMinInit = num1; }
-    void SetBeamSpotSigma(G4double num1) { fBeamSpotSigma = num1; }
-    void PassTarget(G4double);
-    void PrepareBeamFile(G4String);
-    void SetLayeredTargetBeamDistro(G4int layer);
+   void SetNumberOfDecayingLaBrDetectors(G4int num) { fNumberOfDecayingLaBrDetectors = num; }
+   void SetEfficiencyEnergy(G4double num)
+   {
+      fEffEnergy = num;
+      fHistoManager->BeamEnergy(num);
+   }
+   void SetEfficiencyDirection(G4ThreeVector num)
+   {
+      fEffDirection     = num;
+      fEffDirectionBool = true;
+   }
 
-    void SetAngularCorrelation(G4ThreeVector num ) { fAngularCorrelation = static_cast<AcType>(num.x()); fEnergyDraining = num.y()*keV; fEnergyFeeding = num.z()*keV; }
+   void PassEfficiencyPosition(G4ThreeVector num);
+   void SetEfficiencyPosition(G4ThreeVector num)
+   {
+      fEffPosition     = num;
+      fEffPositionBool = true;
+      PassEfficiencyPosition(fEffPosition);
+   }
 
-	 void SetKentuckyEnergy(G4double val);
-	 void SetKentuckyReaction(G4String reaction);
-	 void SetMinimumPhi(G4double val);
-	 void SetMaximumPhi(G4double val);
-	 void SetMinimumTheta(G4double val);
-	 void SetMaximumTheta(G4double val);
-    
-	 void SetVerbosityLevel(G4int val) { fVerbosityLevel = val; }
+   void SetEfficiencyParticle(G4String val)
+   {
+      fEffParticle     = val;
+      fEffParticleBool = true;
+   }
+   void SetEfficiencyPolarization(G4ThreeVector num)
+   {
+      fEffPolarizationVector = num;
+      fEffPolarization       = true;
+   }
+   void SetConeMaxAngle(G4double num1)
+   {
+      fAngleInit        = num1;
+      fConeAngleBool    = true;
+      fEffDirectionBool = true;
+   }
+   void SetConeMinAngle(G4double num1) { fAngleMinInit = num1; }
+   void SetBeamSpotSigma(G4double num1) { fBeamSpotSigma = num1; }
+   void PassTarget(G4double);
+   void PrepareBeamFile(G4String);
+   void SetLayeredTargetBeamDistro(G4int layer);
+
+   void SetAngularCorrelation(G4ThreeVector num)
+   {
+      fAngularCorrelation = static_cast<AcType>(num.x());
+      fEnergyDraining     = num.y() * keV;
+      fEnergyFeeding      = num.z() * keV;
+   }
+
+   void SetKentuckyEnergy(G4double val);
+   void SetKentuckyReaction(G4String reaction);
+   void SetMinimumPhi(G4double val);
+   void SetMaximumPhi(G4double val);
+   void SetMinimumTheta(G4double val);
+   void SetMaximumTheta(G4double val);
+
+   void SetVerbosityLevel(G4int val) { fVerbosityLevel = val; }
 
 private:
-    //variables
-	 G4int fVerbosityLevel;
+   //variables
+   G4int fVerbosityLevel;
 
-    G4int fNumberOfDecayingLaBrDetectors;
-    G4double fEffEnergy;
-    G4ThreeVector fEffDirection;
-    G4ThreeVector fEffPosition;
-    G4bool fEffDirectionBool;
-    G4bool fEffPositionBool;
-    G4String fEffParticle;
-    G4bool fEffParticleBool;
-    G4double fDetectorAnglesLaBr3[8][5];
-    G4bool fEffPolarization;
-    G4ThreeVector fEffPolarizationVector;
-    
-    G4double fAngleInit;
-    G4bool fConeAngleBool;
-    G4double fAngleMinInit;
-    G4double fBeamSpotSigma;
+   G4int         fNumberOfDecayingLaBrDetectors;
+   G4double      fEffEnergy;
+   G4ThreeVector fEffDirection;
+   G4ThreeVector fEffPosition;
+   G4bool        fEffDirectionBool;
+   G4bool        fEffPositionBool;
+   G4String      fEffParticle;
+   G4bool        fEffParticleBool;
+   G4double      fDetectorAnglesLaBr3[8][5];
+   G4bool        fEffPolarization;
+   G4ThreeVector fEffPolarizationVector;
 
-    G4bool fTargetDistro;
-    G4double fLayerStart;
-    G4double fLayerLength;
-    G4bool fNeedFileDistro;
+   G4double fAngleInit;
+   G4bool   fConeAngleBool;
+   G4double fAngleMinInit;
+   G4double fBeamSpotSigma;
 
-	 G4double fMinimumPhi;
-	 G4double fMaximumPhi;
-	 G4double fMinimumTheta;
-	 G4double fMaximumTheta;
+   G4bool   fTargetDistro;
+   G4double fLayerStart;
+   G4double fLayerLength;
+   G4bool   fNeedFileDistro;
 
-	 Kentucky* fKentucky;
-    
-	 // angular correlation settings
-	 enum class AcType { Z0 = 0, Z2 = 2, Z4 = 4, NoAngularCorrelation = 10 };
-	 AcType fAngularCorrelation{AcType::NoAngularCorrelation};
-	 G4double fEnergyFeeding{0.};
-	 G4double fEnergyDraining{0.};
+   G4double fMinimumPhi;
+   G4double fMaximumPhi;
+   G4double fMinimumTheta;
+   G4double fMaximumTheta;
 
-    //functions
-    void LaBrinit();
+   Kentucky* fKentucky;
+
+   // angular correlation settings
+   enum class AcType { Z0                   = 0,
+                       Z2                   = 2,
+                       Z4                   = 4,
+                       NoAngularCorrelation = 10 };
+   AcType   fAngularCorrelation{AcType::NoAngularCorrelation};
+   G4double fEnergyFeeding{0.};
+   G4double fEnergyDraining{0.};
+
+   //functions
+   void LaBrinit();
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif
-
-

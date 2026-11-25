@@ -52,43 +52,41 @@ class G4UIcmdWithABool;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class PrimaryGeneratorMessenger: public G4UImessenger
-{
+class PrimaryGeneratorMessenger : public G4UImessenger {
 public:
-    PrimaryGeneratorMessenger(PrimaryGeneratorAction*);
-    virtual ~PrimaryGeneratorMessenger();
+   PrimaryGeneratorMessenger(PrimaryGeneratorAction*);
+   virtual ~PrimaryGeneratorMessenger();
 
 public:
-    void SetNewValue(G4UIcommand*, G4String);
+   void SetNewValue(G4UIcommand*, G4String);
 
 private:
-    PrimaryGeneratorAction*        fAction;
+   PrimaryGeneratorAction* fAction;
 
-    G4UIcmdWithAnInteger*          fNumberOfDecayingLaBrDetectorsCmd;
-    G4UIcmdWithADoubleAndUnit*     fEfficiencyEnergyCmd;
-    G4UIcmdWith3Vector*            fEfficiencyDirectionCmd;
-    G4UIcmdWith3VectorAndUnit*     fEfficiencyPositionCmd;
-    G4UIcmdWithAString*            fEfficiencyParticleCmd;
-    G4UIcmdWith3Vector*            fEfficiencyPolarizationCmd;
-    G4UIcmdWithADoubleAndUnit*     fConeRadiusCmd;//SPICE cone radius
-    G4UIcmdWithADoubleAndUnit*     fConeZValueCmd;//SPICE cone with values
-    G4UIcmdWithADoubleAndUnit*     fConeRValueCmd;
-    G4UIcmdWithADoubleAndUnit*     fConeAngleCmd;
-    G4UIcmdWithADoubleAndUnit*     fConeMinAngleCmd;
-    G4UIcmdWithADoubleAndUnit*     fBeamSpotSigmaCmd;
-    G4UIcmdWithAnInteger*			  fBeamDistroCmd;
-    G4UIcmdWithAString*				  fBeamFileCmd;
-    G4UIcmdWith3Vector*            fAngularCorrelationCmd;
-    G4UIcmdWithADoubleAndUnit*     fKentuckyEnergyCmd;
-    G4UIcmdWithAString*            fKentuckyReactionCmd;
-    G4UIcmdWithADoubleAndUnit*     fMinimumPhiCmd;
-    G4UIcmdWithADoubleAndUnit*     fMaximumPhiCmd;
-    G4UIcmdWithADoubleAndUnit*     fMinimumThetaCmd;
-    G4UIcmdWithADoubleAndUnit*     fMaximumThetaCmd;
-    G4UIcmdWithAnInteger*			  fVerbosityCmd;
+   G4UIcmdWithAnInteger*      fNumberOfDecayingLaBrDetectorsCmd;
+   G4UIcmdWithADoubleAndUnit* fEfficiencyEnergyCmd;
+   G4UIcmdWith3Vector*        fEfficiencyDirectionCmd;
+   G4UIcmdWith3VectorAndUnit* fEfficiencyPositionCmd;
+   G4UIcmdWithAString*        fEfficiencyParticleCmd;
+   G4UIcmdWith3Vector*        fEfficiencyPolarizationCmd;
+   G4UIcmdWithADoubleAndUnit* fConeRadiusCmd;   //SPICE cone radius
+   G4UIcmdWithADoubleAndUnit* fConeZValueCmd;   //SPICE cone with values
+   G4UIcmdWithADoubleAndUnit* fConeRValueCmd;
+   G4UIcmdWithADoubleAndUnit* fConeAngleCmd;
+   G4UIcmdWithADoubleAndUnit* fConeMinAngleCmd;
+   G4UIcmdWithADoubleAndUnit* fBeamSpotSigmaCmd;
+   G4UIcmdWithAnInteger*      fBeamDistroCmd;
+   G4UIcmdWithAString*        fBeamFileCmd;
+   G4UIcmdWith3Vector*        fAngularCorrelationCmd;
+   G4UIcmdWithADoubleAndUnit* fKentuckyEnergyCmd;
+   G4UIcmdWithAString*        fKentuckyReactionCmd;
+   G4UIcmdWithADoubleAndUnit* fMinimumPhiCmd;
+   G4UIcmdWithADoubleAndUnit* fMaximumPhiCmd;
+   G4UIcmdWithADoubleAndUnit* fMinimumThetaCmd;
+   G4UIcmdWithADoubleAndUnit* fMaximumThetaCmd;
+   G4UIcmdWithAnInteger*      fVerbosityCmd;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif
-

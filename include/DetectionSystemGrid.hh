@@ -41,55 +41,52 @@
 class G4AssemblyVolume;
 class FieldSetup;
 
-class DetectionSystemGrid
-{
+class DetectionSystemGrid {
 public:
-    DetectionSystemGrid(G4double xLengthIn, G4double yLengthIn, G4double zLengthIn, G4double gridSizeIn, G4String gridMat, G4ThreeVector gridColour, G4ThreeVector posOffset);
-    ~DetectionSystemGrid();
+   DetectionSystemGrid(G4double xLengthIn, G4double yLengthIn, G4double zLengthIn, G4double gridSizeIn, G4String gridMat, G4ThreeVector gridColour, G4ThreeVector posOffset);
+   ~DetectionSystemGrid();
 
-    //    G4int Build(G4SDManager* mySDman);
-    G4int Build();
-    G4int PlaceDetector(G4LogicalVolume* expHallLog);
+   //    G4int Build(G4SDManager* mySDman);
+   G4int Build();
+   G4int PlaceDetector(G4LogicalVolume* expHallLog);
 
 private:
-    // Logical volumes
-    G4LogicalVolume* fGridcellLog;
+   // Logical volumes
+   G4LogicalVolume* fGridcellLog;
 
-    // Assembly volumes
-    G4AssemblyVolume* fAssembly;
+   // Assembly volumes
+   G4AssemblyVolume* fAssembly;
 
-    //    SensitiveDetector* crystalBlockSD;
+   //    SensitiveDetector* crystalBlockSD;
 
-    FieldSetup* fEmFieldSetup;
+   FieldSetup* fEmFieldSetup;
 
-    G4double fXLength;
-    G4double fYLength;
-    G4double fZLength;
+   G4double fXLength;
+   G4double fYLength;
+   G4double fZLength;
 
-    G4double fXPosOffset;
-    G4double fYPosOffset;
-    G4double fZPosOffset;
+   G4double fXPosOffset;
+   G4double fYPosOffset;
+   G4double fZPosOffset;
 
-    G4double fCubeSize;
+   G4double fCubeSize;
 
-    G4int fCellsXRow;
-    G4int fCellsYRow;
-    G4int fCellsZRow;
+   G4int fCellsXRow;
+   G4int fCellsYRow;
+   G4int fCellsZRow;
 
+   G4int    fCopyNumber;
+   G4int    fNumberOfCells;
+   G4int    fCellsPerRow;
+   G4double fCellWidth;
 
-    G4int fCopyNumber;
-    G4int fNumberOfCells;
-    G4int fCellsPerRow;
-    G4double fCellWidth;
+   G4String fCellMaterial;
 
-    G4String fCellMaterial;
+   G4ThreeVector fCellColour;
 
-    G4ThreeVector fCellColour;
+   G4Box* BuildCell();
 
-    G4Box* BuildCell();
-
-    G4int BuildCellVolume();
+   G4int BuildCellVolume();
 };
 
 #endif
-

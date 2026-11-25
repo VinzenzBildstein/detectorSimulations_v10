@@ -27,7 +27,7 @@
 // $Id: DetectorConstruction.hh,v 1.1 2010-10-18 15:56:17 maire Exp $
 // GEANT4 tag $Name: geant4-09-04-patch-02 $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -38,82 +38,79 @@
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
 
-class DetectionSystemSceptar	
-{
+class DetectionSystemSceptar {
 public:
-    DetectionSystemSceptar();
-    ~DetectionSystemSceptar();
+   DetectionSystemSceptar();
+   ~DetectionSystemSceptar();
 
-    G4int Build() ; //G4SDManager* mySDman);
-    G4int PlaceDetector(G4LogicalVolume* expHallLog, G4int detectorNumber);
+   G4int Build();   //G4SDManager* mySDman);
+   G4int PlaceDetector(G4LogicalVolume* expHallLog, G4int detectorNumber);
 
 private:
-    // Assembly volumes
-    G4AssemblyVolume* fAssembly;
-    G4AssemblyVolume* fAssemblySquare;
-    G4AssemblyVolume* fAssemblyAngled;
-    G4AssemblyVolume* fAssemblySquareSD;
-    G4AssemblyVolume* fAssemblyAngledSD;
+   // Assembly volumes
+   G4AssemblyVolume* fAssembly;
+   G4AssemblyVolume* fAssemblySquare;
+   G4AssemblyVolume* fAssemblyAngled;
+   G4AssemblyVolume* fAssemblySquareSD;
+   G4AssemblyVolume* fAssemblyAngledSD;
 
-    //    SensitiveDetector* squareScintSD;
-    //    SensitiveDetector* angledScintSD;
+   //    SensitiveDetector* squareScintSD;
+   //    SensitiveDetector* angledScintSD;
 
-    G4double fConvert;
-    G4double fSquareScintillatorLength;
-    G4double fSquareScintillatorWidth;
-    G4double fSquareScintillatorThickness;
-    G4double fAngledScintillatorLength;
-    G4double fAngledScintillatorLongWidth;
-    G4double fAngledScintillatorShortWidth;
-    G4double fAngledScintillatorThickness;
-    G4double fMylarThickness;
-    G4double fScintGap;
-    G4double fScintAngle1;
-    G4double fScintAngle2;
-    G4double fScintAngle3;
-    G4double fScintAngle4;
-    G4double fScintAngleMove;
-    G4double fSquareScintRadialDistance;
-    G4double fAngledScintRadialDistance;
-    G4double fAngledScintMoveBack;
-    G4double fDelrinInnerRadius;
-    G4double fDelrinOuterRadius;
-    G4double fDelrin2InnerRadius;
-    G4double fDelrin2OuterRadius;
-    G4double fHevimetInnerRadius;
-    G4double fHevimetOuterRadius;
-    G4double fDelrinHoleRadius;
-    G4double fSeparateHemispheres;
-    
-    //##################################################################
-    //### methods to construct all of the components of the detector ###
-    //##################################################################
-    G4int ConstructScintillator();
-    G4int ConstructDelrinShell();
-    G4int Construct2ndDelrinShell();
-    G4int ConstructHevimetShell();
+   G4double fConvert;
+   G4double fSquareScintillatorLength;
+   G4double fSquareScintillatorWidth;
+   G4double fSquareScintillatorThickness;
+   G4double fAngledScintillatorLength;
+   G4double fAngledScintillatorLongWidth;
+   G4double fAngledScintillatorShortWidth;
+   G4double fAngledScintillatorThickness;
+   G4double fMylarThickness;
+   G4double fScintGap;
+   G4double fScintAngle1;
+   G4double fScintAngle2;
+   G4double fScintAngle3;
+   G4double fScintAngle4;
+   G4double fScintAngleMove;
+   G4double fSquareScintRadialDistance;
+   G4double fAngledScintRadialDistance;
+   G4double fAngledScintMoveBack;
+   G4double fDelrinInnerRadius;
+   G4double fDelrinOuterRadius;
+   G4double fDelrin2InnerRadius;
+   G4double fDelrin2OuterRadius;
+   G4double fHevimetInnerRadius;
+   G4double fHevimetOuterRadius;
+   G4double fDelrinHoleRadius;
+   G4double fSeparateHemispheres;
 
-    //Logical Volumes
-    //
-    G4LogicalVolume* fSquareMylarLog;
-    G4LogicalVolume* fAngledMylarLog;
-    G4LogicalVolume* fSquareScintillatorLog;
-    G4LogicalVolume* fAngledScintillatorLog;
-    G4LogicalVolume* fDelrinShellLog;
-    G4LogicalVolume* fDelrinShell2Log;
-    G4LogicalVolume* fHevimetShellLog;
+   //##################################################################
+   //### methods to construct all of the components of the detector ###
+   //##################################################################
+   G4int ConstructScintillator();
+   G4int ConstructDelrinShell();
+   G4int Construct2ndDelrinShell();
+   G4int ConstructHevimetShell();
 
-    G4Trd* SquareMylar();
-    G4SubtractionSolid* SquareMylarWithCut();
-    G4SubtractionSolid* AngledMylar();
-    G4SubtractionSolid* AngledMylarWithCut();
-    G4Trd* SquareScintillator();
-    G4SubtractionSolid* AngledScintillator();
-    G4SubtractionSolid* DelrinShell();
-    G4SubtractionSolid* DelrinShell2();
-    G4SubtractionSolid* HevimetShell();
+   //Logical Volumes
+   //
+   G4LogicalVolume* fSquareMylarLog;
+   G4LogicalVolume* fAngledMylarLog;
+   G4LogicalVolume* fSquareScintillatorLog;
+   G4LogicalVolume* fAngledScintillatorLog;
+   G4LogicalVolume* fDelrinShellLog;
+   G4LogicalVolume* fDelrinShell2Log;
+   G4LogicalVolume* fHevimetShellLog;
 
+   G4Trd*              SquareMylar();
+   G4SubtractionSolid* SquareMylarWithCut();
+   G4SubtractionSolid* AngledMylar();
+   G4SubtractionSolid* AngledMylarWithCut();
+   G4Trd*              SquareScintillator();
+   G4SubtractionSolid* AngledScintillator();
+   G4SubtractionSolid* DelrinShell();
+   G4SubtractionSolid* DelrinShell2();
+   G4SubtractionSolid* HevimetShell();
 };
 
 #endif
-

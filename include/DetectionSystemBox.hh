@@ -27,7 +27,7 @@
 // $Id: DetectorConstruction.hh,v 1.1 2010-10-18 15:56:17 maire Exp $
 // GEANT4 tag $Name: geant4-09-04-patch-02 $
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -40,48 +40,45 @@
 
 class G4AssemblyVolume;
 
-class DetectionSystemBox
-{
+class DetectionSystemBox {
 public:
-    DetectionSystemBox(G4double xLengthIn, G4double yLengthIn, G4double zLengthIn, G4double thicknessIn, G4String boxMat, G4ThreeVector boxColour);
-    ~DetectionSystemBox();
+   DetectionSystemBox(G4double xLengthIn, G4double yLengthIn, G4double zLengthIn, G4double thicknessIn, G4String boxMat, G4ThreeVector boxColour);
+   ~DetectionSystemBox();
 
-    //    G4int Build(G4SDManager* mySDman);
-    G4int Build();
-    G4int PlaceDetector(G4LogicalVolume* expHallLog);
+   //    G4int Build(G4SDManager* mySDman);
+   G4int Build();
+   G4int PlaceDetector(G4LogicalVolume* expHallLog);
 
 private:
-    // Logical volumes
-    G4LogicalVolume* fCellLog;
-    G4LogicalVolume* fSideNormXLog;
-    G4LogicalVolume* fSideNormYLog;
-    G4LogicalVolume* fSideNormZLog;
+   // Logical volumes
+   G4LogicalVolume* fCellLog;
+   G4LogicalVolume* fSideNormXLog;
+   G4LogicalVolume* fSideNormYLog;
+   G4LogicalVolume* fSideNormZLog;
 
+   // Assembly volumes
+   G4AssemblyVolume* fAssembly;
 
-    // Assembly volumes
-    G4AssemblyVolume* fAssembly;
+   //    SensitiveDetector* crystalBlockSD;
 
-    //    SensitiveDetector* crystalBlockSD;
+   G4int fCopyNumber;
 
-    G4int fCopyNumber;
+   G4double fXLength;
+   G4double fYLength;
+   G4double fZLength;
+   G4double fThickness;
 
-    G4double fXLength;
-    G4double fYLength;
-    G4double fZLength;
-    G4double fThickness;
+   G4String fCellMaterial;
 
-    G4String fCellMaterial;
+   G4ThreeVector fCellColour;
 
-    G4ThreeVector fCellColour;
+   G4Box* BuildXNormalSide();
+   G4Box* BuildYNormalSide();
+   G4Box* BuildZNormalSide();
 
-    G4Box* BuildXNormalSide();
-    G4Box* BuildYNormalSide();
-    G4Box* BuildZNormalSide();
-
-    G4int BuildXNormalVolumes();
-    G4int BuildYNormalVolumes();
-    G4int BuildZNormalVolumes();
+   G4int BuildXNormalVolumes();
+   G4int BuildYNormalVolumes();
+   G4int BuildZNormalVolumes();
 };
 
 #endif
-

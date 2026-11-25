@@ -37,8 +37,8 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 ActionInitialization::ActionInitialization(DetectorConstruction* detector)
-    : G4VUserActionInitialization(),
-      fDetector(detector)
+   : G4VUserActionInitialization(),
+     fDetector(detector)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -50,33 +50,33 @@ ActionInitialization::~ActionInitialization()
 
 void ActionInitialization::BuildForMaster() const
 {
-	// Actions
-	// the master only need a HistoManager to handle histograms, so we pass a null
-	// pointer instead of a pointer to a HistoManager unless we use require histograms
-	// That was the idea, but at this point we havent clarified if we want histograms 
-    // so we can't do this!!!
-	auto histManager = new HistoManager(fDetector);
-	SetUserAction(new RunAction(histManager));
+   // Actions
+   // the master only need a HistoManager to handle histograms, so we pass a null
+   // pointer instead of a pointer to a HistoManager unless we use require histograms
+   // That was the idea, but at this point we havent clarified if we want histograms
+   // so we can't do this!!!
+   auto histManager = new HistoManager(fDetector);
+   SetUserAction(new RunAction(histManager));
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void ActionInitialization::Build() const
 {
-	// Actions
-	//
-	auto histManager = new HistoManager(fDetector);
+   // Actions
+   //
+   auto histManager = new HistoManager(fDetector);
 
-	SetUserAction(new PrimaryGeneratorAction(histManager));
+   SetUserAction(new PrimaryGeneratorAction(histManager));
 
-	RunAction* runAction = new RunAction(histManager);
-	SetUserAction(runAction);
+   RunAction* runAction = new RunAction(histManager);
+   SetUserAction(runAction);
 
-	EventAction* eventAction = new EventAction(runAction, histManager);
-	SetUserAction(eventAction);
+   EventAction* eventAction = new EventAction(runAction, histManager);
+   SetUserAction(eventAction);
 
-	SteppingAction* steppingAction = new SteppingAction(fDetector, eventAction);
-	SetUserAction(steppingAction);
-}  
+   SteppingAction* steppingAction = new SteppingAction(fDetector, eventAction);
+   SetUserAction(steppingAction);
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
